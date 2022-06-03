@@ -37,7 +37,7 @@ class Opticas extends conectar {//inicio de la clase
 
 	//GENERAR CODIGO DINAMICO-SUCURSAL
 public function get_correlativo_sucursal(){
-  $conectar= parent::conexion();
+  $conectar = parent::conexion();
   $sql= "select codigo from sucursal_optica order by codigo DESC limit 1;";
   $sql=$conectar->prepare($sql);
   $sql->execute();
@@ -51,6 +51,19 @@ public function get_sucursales_opticas(){
 	$sql=$conectar->prepare($sql);
 	$sql->execute();
 	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+///// GET SUCURSALES POR ID 
+public function getSucursalId($id){
+	$conectar= parent::conexion();
+	parent::set_names();
+
+	$sql = "select*from sucursal_optica where id_optica=?;";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1, $id);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+
 }
 	
 	//VERIFICAR SI EXISTE OPTICA

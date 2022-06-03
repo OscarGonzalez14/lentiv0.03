@@ -51,7 +51,6 @@ foreach($datos as $row)
     $sub_array[] = $row["telefono"];
     $sub_array[] = $row["direccion"];
     $sub_array[] = '<button type="button" id="'.$row["id_sucursal"].'" class="btn btn-edit btn-sm editar_sucursal  bg-light" style="text-align:center" onClick="show_datos_sucursal('.$row["id_sucursal"].',\''.$row["codigo"].'\');" data-toggle="modal" data-target="#nueva_sucursal_optica" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit" aria-hidden="true" style="color:#006600"></i></button>
-
     <button type="button"  class="btn btn-sm bg-light" onClick="eliminar_sucursal('.$row["id_sucursal"].')"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></button>';
 
     $data[] = $sub_array;
@@ -65,6 +64,16 @@ $results = array(
 echo json_encode($results);
 
 break;
+
+case 'listar_sucursales_optica_id';
+  $data = $optica->getSucursalId($_POST["id_optica"]);
+  $sucursales = Array();
+
+  foreach($data as $s){
+    array_push($sucursales,array('id'=>$s["id_sucursal"],'text'=>$s["direccion"]));
+  }
+  echo json_encode($sucursales);
+  break;
 
 //GET CODIGO SUCURSAL
 case "get_correlativo_sucursal":
