@@ -584,6 +584,7 @@ function get_dataTableBasesFtop(id_tabla,id_div,marca,diseno){
   });
 }
 
+
 function getDataModalFtop(codigo,marca,base,adicion,ojo,id_td,id_tabla,diseno){
  
   $('#modal_ingresos_baseftop').modal();

@@ -1,8 +1,30 @@
-function listarCobrosRango(fecha){
-    dtTemplateCobros("datatable_listar_cobros","obtener_creditos_rango",fecha)
-  }
-  function dtTemplateCobros(table,route,...Args){
-      console.log(Args); 
+
+function initCobros(){
+  console.log("Reinciando js...")
+}
+
+function ProofCobros(table,route,...Args){
+
+  $.ajax({
+    url:"../ajax/cobros.php?op="+route,
+    method:"POST",
+    data : {Args:Args},
+    cache:false,
+    dataType: "html",
+    success:function(data){
+      console.log(data)
+    }
+  });
+}
+
+
+function listarCobrosRango(fecha,optica){
+  dtTemplateCobros("datatable_listar_cobros","obtener_creditos_rango",fecha,optica)
+}
+
+function dtTemplateCobros(table,route,...Args){
+
+      console.log(Args);
       tabla = $('#'+table).DataTable({      
       "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -12,9 +34,9 @@ function listarCobrosRango(fecha){
       ],
   
       "ajax":{
-        url:"../ajax/creditos.php?op=" + route,
+        url:"../ajax/cobros.php?op="+ route,
         type : "POST",
-        data: {argumentos:Args},
+        data: {Args:Args},
         dataType : "json",       
         error: function(e){
         console.log(e.responseText);
@@ -49,8 +71,8 @@ function listarCobrosRango(fecha){
             "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",       
             "sSortDescending": ": Activar para ordenar la columna de manera descendente"   
         }}, //cerrando language
-     });
-  }
+    });
+}
 
 $(document).ready(function(){
     $("#optica-cobro").change(function () {         
@@ -81,5 +103,7 @@ function filtrarFechas(fecha){
     let optica = document.getElementById("optica-cobro").value;
     let sucursales = document.getElementById("sucursal-cobro").value;
 
-    listarCobrosRango(fecha);
+    listarCobrosRango(fecha,optica);
 }
+
+initCobros();

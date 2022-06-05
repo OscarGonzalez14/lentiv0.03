@@ -119,6 +119,7 @@ body{
                  <th>Monto</th>
                  <th>Estado</th>
                  <th>Saldo</th>
+                 <th>Fecha Fact.</th>
                  <th>Fecha pago</th>
                  <th>Mora</th>
                </thead>
