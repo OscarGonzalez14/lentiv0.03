@@ -7,7 +7,7 @@ function init_fact(){
 
 ///////////////////////// TEMPLATE DATATABLE /////////////
 function get_ccf_hoy(){
-  dtTemplate("datatable_ccf","listar_ccf_diarios")
+  dtTemplate("datatable_ccf","obtener_creditos_rango")
 }
 function dtTemplate(table,route){
 	tabla = $('#'+table).DataTable({      

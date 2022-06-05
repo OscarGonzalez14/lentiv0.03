@@ -3,7 +3,7 @@ require_once("../config/conexion.php");
 
 class Opticas extends conectar {//inicio de la clase
 
-////GUARDAR OPTICA
+	////GUARDAR OPTICA
 	public function guardar_optica($nom_optica,$num_optica,$id_usuario){
 		$conectar= parent::conexion();
 		parent::set_names();
@@ -14,7 +14,7 @@ class Opticas extends conectar {//inicio de la clase
 		$sql->bindValue(3, $id_usuario);
 		$sql->execute();
 	}
-//////VERIFICAR SI EXISTE OPTICA
+	//////VERIFICAR SI EXISTE OPTICA
 	public function valida_existencia_optica($nom_optica,$num_optica){
 		$conectar= parent::conexion();
 		parent::set_names();
@@ -36,35 +36,35 @@ class Opticas extends conectar {//inicio de la clase
 	}
 
 	//GENERAR CODIGO DINAMICO-SUCURSAL
-public function get_correlativo_sucursal(){
-  $conectar = parent::conexion();
-  $sql= "select codigo from sucursal_optica order by codigo DESC limit 1;";
-  $sql=$conectar->prepare($sql);
-  $sql->execute();
-  return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-}
-
-///LISTAR OPTICAS SUCURSALES
-public function get_sucursales_opticas(){
-	$conectar= parent::conexion();
-	$sql= "select so.codigo, o.nombre, so.nombre_sucursal, so.id_sucursal, so.telefono, so.direccion from sucursal_optica as so JOIN optica as o WHERE so.id_optica=o.id_optica order by so.id_sucursal desc;";
+	public function get_correlativo_sucursal(){
+	$conectar = parent::conexion();
+	$sql= "select codigo from sucursal_optica order by codigo DESC limit 1;";
 	$sql=$conectar->prepare($sql);
 	$sql->execute();
 	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-}
+	}
 
-///// GET SUCURSALES POR ID 
-public function getSucursalId($id){
-	$conectar= parent::conexion();
-	parent::set_names();
+	///LISTAR OPTICAS SUCURSALES
+	public function get_sucursales_opticas(){
+		$conectar= parent::conexion();
+		$sql= "select so.codigo, o.nombre, so.nombre_sucursal, so.id_sucursal, so.telefono, so.direccion from sucursal_optica as so JOIN optica as o WHERE so.id_optica=o.id_optica order by so.id_sucursal desc;";
+		$sql=$conectar->prepare($sql);
+		$sql->execute();
+		return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+	}
 
-	$sql = "select*from sucursal_optica where id_optica=?;";
-	$sql=$conectar->prepare($sql);
-	$sql->bindValue(1, $id);
-	$sql->execute();
-	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+	///// GET SUCURSALES POR ID 
+	public function getSucursalId($id){
+		$conectar= parent::conexion();
+		parent::set_names();
 
-}
+		$sql = "select*from sucursal_optica where id_optica=?;";
+		$sql=$conectar->prepare($sql);
+		$sql->bindValue(1, $id);
+		$sql->execute();
+		return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+
+	}
 	
 	//VERIFICAR SI EXISTE OPTICA
 	public function valida_existencia_sucursal($codigo){
@@ -117,27 +117,27 @@ public function getSucursalId($id){
 		return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 	}
 
-//VALIDACION PARA ELIMINAR SUCURSAL SI EXISTE ORDEN
-   public function valida_sucursal_orden($id_sucursal){
-    $conectar= parent::conexion();
-    $sql="select*from orden where id_sucursal=?;";
-    $sql=$conectar->prepare($sql);
-    $sql->bindValue(1, $id_sucursal);
-    $sql->execute();
-    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-  }
+	//VALIDACION PARA ELIMINAR SUCURSAL SI EXISTE ORDEN
+	public function valida_sucursal_orden($id_sucursal){
+		$conectar= parent::conexion();
+		$sql="select*from orden where id_sucursal=?;";
+		$sql=$conectar->prepare($sql);
+		$sql->bindValue(1, $id_sucursal);
+		$sql->execute();
+		return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+	}
 
-  //FUNCION PARA ELIMINAR SUCURSAL
-  public function eliminar_sucursal($id_sucursal){
-    $conectar=parent::conexion();
-    $sql="delete from sucursal_optica where id_sucursal=?";
-    $sql=$conectar->prepare($sql);
-    $sql->bindValue(1, $id_sucursal);
-    $sql->execute();
-    return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
-  }
+	//FUNCION PARA ELIMINAR SUCURSAL
+	public function eliminar_sucursal($id_sucursal){
+		$conectar=parent::conexion();
+		$sql="delete from sucursal_optica where id_sucursal=?";
+		$sql=$conectar->prepare($sql);
+		$sql->bindValue(1, $id_sucursal);
+		$sql->execute();
+		return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
+	}
 
-//EDITAR SUCURSAL
+	//EDITAR SUCURSAL
 	public function editar_sucursal($nom_sucursal,$direccion,$telefono,$correo,$encargado,$codigo,$id_optica,$usuario,$id_sucursal){
 		$conectar= parent::conexion();
 		parent::set_names();

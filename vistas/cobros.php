@@ -93,7 +93,7 @@ body{
 
           <div class=" form-group col-sm-1">
               <label for="ex3">Filtrar</label>
-              <button type="button" class="btn btn-block btn-dark" data-toggle="modal" data-target="#filtrar-creditos"><i class="fas fa-search"></i></button>
+              <button type="button" class="btn btn-block btn-dark" data-toggle="modal" data-target="#filtrar-creditos" onClick="resetDatePicker();"><i class="fas fa-search"></i></button>
           </div>
 
           <div class=" form-group col-sm-2">
@@ -108,17 +108,19 @@ body{
           </div>
 
           </div><!--Fin form row-->
-           <table width="100%" class="table-hover table-bordered" id="datatable_ccf" data-order='[[ 0, "desc" ]]' style="margin-top: 3px">        
+           <table width="100%" class="table-hover table-bordered" id="datatable_listar_cobros" data-order='[[ 0, "desc" ]]' style="margin-top: 3px">        
                <thead class="style_th bg-dark" style="color: white">
                  <th>Id</th>
-                 <th>Correlativo</th>
                  <th>#Orden</th>
+                 <th>#Comprobante</th>
                  <th>Paciente</th>
                  <th>Optica</th>
                  <th>Sucursal</th>
                  <th>Monto</th>
-                 <th>Fecha fect.</th>
-                 <th>Acciones</th>
+                 <th>Estado</th>
+                 <th>Saldo</th>
+                 <th>Fecha pago</th>
+                 <th>Mora</th>
                </thead>
                <tbody class="style_th"></tbody>
              </table>
@@ -142,7 +144,7 @@ body{
         <div class="form-group">
         <label>Seleccionar rango:</label>
         <div class="input-group">
-          <input type="text" class="form-control float-right" id="rango-cobro" name="daterange">
+          <input type="text" class="form-control float-right" id="rango-cobro" name="daterange"  value="2000-05-05">
         </div>
           </div>
         </div>
@@ -190,7 +192,11 @@ require_once("links_js.php");
 <script type="text/javascript" src='../js/cleave.js'></script>
 
 <script>
-  $(function() {
+
+function resetDatePicker(){
+ // $("#rango-cobro").datepicker('setDate', "");​
+ var today = new Date();
+
   $('input[name="daterange"]').daterangepicker({
     locale: {
       format: 'DD-MM-YYYY',
@@ -198,9 +204,10 @@ require_once("links_js.php");
 
         }
   }, function(start, end, label) {
-    console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
+    let fecha = start.format('DD-MM-YYYY') + '/' + end.format('DD-MM-YYYY');
+    filtrarFechas(fecha)
   });
-});
+}
 </script>
 
   </footer>
@@ -210,3 +217,5 @@ require_once("links_js.php");
  <?php } else{
 echo "Acceso denegado";
   } ?>
+
+

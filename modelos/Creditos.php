@@ -12,8 +12,6 @@ class Creditos extends conectar {//inicio de la clase
       	$sql=$conectar->prepare($sql);
       	$sql->execute();
       	return $sql->fetchColumn();
-
-
 	}
 
 	public function pagoMeMensual($fecha_registro,$hoy){
