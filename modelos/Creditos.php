@@ -166,3 +166,7 @@ class Creditos extends conectar {//inicio de la clase
 
 //$creditos = new Creditos();
 //$creditos->pagoMeMensual();
+
+
+///////////////////////CREDITOS CON MORA
+//SELECT fecha_fact,(TIMESTAMPDIFF(DAY,`fecha_fact`,NOW())) AS transc FROM creditos where (TIMESTAMPDIFF(DAY,`fecha_fact`,NOW()) > 0);
