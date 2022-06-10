@@ -20,11 +20,9 @@ $opti=$optica->obtener_opticas();
  ?>
 <style>
   
-.buttons-excel{
-    background-color: green !important;
-    margin: 2px;
-    max-width: 150px;
-}
+.buttons-excel{background-color: #fff !important;margin: 2px;max-width: 150px;color: black;
+                 border: solid 1px green;
+                }
 body{
   font-family: Helvetica, Arial, sans-serif;
 
@@ -54,111 +52,50 @@ body{
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <section class="content">
-      <div class="container-fluid">
-        <h1 style="font-size: 15px; text-align: center;padding: 3px"><u><b>CREDITOS Y COBROS</b></u></h1>
 
-        <div class="card card-info">
-          <div class="card-header">
-              <h5 class="card-title" style="font-size: 16px;"> COMPROBANTES DE CREDITO FISCAL</h5>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool btn-xs bg-secondary"  onClick="get_ccf_hoy();"><i class="far fa-calendar-check"></i> Hoy
-                  </button>
-                
-              </div>
-          </div>
-            <div style="margin: 0px !important">
-            <style>
-                .buttons-excel{background-color: #fff !important;margin: 2px;max-width: 150px;color: black;
-                 border: solid 1px green;
-                }
-            </style>
-          <div class="form-row" style="margin:3px">
-          <div class=" form-group col-sm-3 select2-purple">
-              <label for="ex3">Óptica</label>
-              <select class="select2 form-control clear_input" id="optica-cobro" multiple="multiple" data-placeholder="Seleccionar optica" data-dropdown-css-class="select2-purple" style="width: 100%;height: ">              
-                <option value="0">Seleccione Optica</option>
-                <?php
-                for ($i=0; $i < sizeof($opti); $i++) { ?>
-                  <option value="<?php echo $opti[$i]["id_optica"]?>"><?php echo strtoupper($opti[$i]["nombre"]);?></option>
-                <?php  } ?>              
-              </select>               
-          </div>
 
-          <div class=" form-group col-sm-4 select2-purple">
-              <label for="ex3">Sucursal</label>
-              <select class="select2 form-control clear_input" id="sucursal-cobro" multiple="multiple" data-placeholder="Seleccionar sucursal" data-dropdown-css-class="select2-purple" style="width: 100%;height: ">              
-                <option value="0">Seleccione sucursal</option>
-              </select>               
-          </div>
+    <div class="card card-warning card-outline" style="margin: 2px;margin-top: 0px !important">
+      <h5 style="text-align: center; font-size: 16px" align="center" class="bg-dark">CUENTAS POR COBRAR</h5>
+      <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist" style="margin-top: 0px !important">
+        <li class="nav-item"  onClick="getCuentasMensuales()">
+          <a class="nav-link" style="background:  #F5FCFF;cursor:pointer;"><i class="fas fa-hand-holding-usd" style="color: black" onClick="getCuentasMensuales()"></i> Mensual</a>
+        </li>
 
-          <div class=" form-group col-sm-1">
-              <label for="ex3">Filtrar</label>
-              <button type="button" class="btn btn-block btn-dark" data-toggle="modal" data-target="#filtrar-creditos" onClick="resetDatePicker();"><i class="fas fa-search"></i></button>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link" style="background:  #F5FCFF;cursor:pointer;"><i class="fas fa-hand-holding-usd" style="color: black" onClick="getCuentasMensuales()"></i> Quincenal</a>
+        </li>
 
-          <div class=" form-group col-sm-2">
-              <label for="ex3">Abonar</label>
-              <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#filtrar-creditos"><i class="	fas fa-hand-holding-usd"></i> Selecc.</button>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link" style="background:  #F5FCFF;cursor:pointer;"><i class="fas fa-hand-holding-usd" style="color: black" onClick="getCuentasMensuales()"></i> Semanal</a>
+        </li>
 
-          
-          <div class=" form-group col-sm-2">
-              <label for="ex3">Abono</label>
-              <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#filtrar-creditos"><i class="	fas fa-hand-holding-usd"></i> Parcial</button>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link" style="background:  #F5FCFF;cursor:pointer;"><i class="fas fa-hand-holding-usd" style="color: black" onClick="getCuentasMensuales()"></i> Contado</a>
+        </li>        
 
-          </div><!--Fin form row-->
-           <table width="100%" class="table-hover table-bordered" id="datatable_listar_cobros" data-order='[[ 0, "desc" ]]' style="margin-top: 3px">        
-               <thead class="style_th bg-dark" style="color: white">
-                 <th>Id</th>
-                 <th><label><input type="checkbox" id="select-all-cobrar-chk" class="form-check-label" onClick="selectOrdenesCobrar()"> Sel.</label></th>
-                 <th>#Orden</th>
-                 <th>#Comprobante</th>
-                 <th>Paciente</th>
-                 <th>Optica</th>
-                 <th>Sucursal</th>
-                 <th>Monto</th>
-                 <th>Estado</th>
-                 <th>Saldo</th>
-                 <th>Fecha Fact.</th>
-                 <th>Fecha pago</th>
-                 <th>Mora</th>
-               </thead>
-               <tbody class="style_th"></tbody>
-             </table>
-            </div>
-        </div>
+    </div>
 
-      </div><!-- /.container-fluid -->
+
+    <div class="container-fluid">
+      <table width="100%" class="table-hover table-bordered" id="dt_cobros_mensuales" data-order='[[ 0, "desc" ]]' style="margin-top: 3px">        
+        <thead class="style_th bg-dark" style="color: white">
+          <th>Optica</th>
+          <th>Limite credito</th>
+          <th>Acumulado</th>
+          <th>Ultima Factura</th>
+          <th>Trancurridos</th>
+          <th>Detalles</th>
+        </thead>
+        <tbody class="style_th"></tbody>
+      </table>         
+    </div><!-- /.container-fluid -->
     </section>
     <!-- /.Modal FILTRAR CREDITOS -->
-    <section>
-         <!-- Modal -->
-  <div class="modal fade" id="filtrar-creditos" role="dialog">
-    <div class="modal-dialog">
     
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-        <div class="form-group">
-        <label>Seleccionar rango:</label>
-        <div class="input-group">
-          <input type="text" class="form-control float-right" id="rango-cobro" name="daterange"  value="2000-05-05">
-        </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
+    <section>
+ 
+  <?php require_once("../modales/modal_detalle_cobros.php");?>
   
-</div>
     </section>
     <!-- /.content -->
     <input type="hidden" id="codigo_orden_fact" value="0" class="data-fct">
@@ -172,6 +109,7 @@ body{
      &nbsp;All rights reserved.
     <div class="float-right d-none d-sm-inline-block">      
     </div>
+</div>
     <?php 
 require_once("links_js.php");
 ?>
@@ -199,21 +137,12 @@ function resetDatePicker(){
  // $("#rango-cobro").datepicker('setDate', "");​
  var today = new Date();
 
-  $('input[name="daterange"]').daterangepicker({
-    locale: {
-      format: 'DD-MM-YYYY',
-              separator: " hasta "
 
-        }
-  }, function(start, end, label) {
-    let fecha = start.format('DD-MM-YYYY') + '/' + end.format('DD-MM-YYYY');
-    filtrarFechas(fecha)
-  });
 }
 </script>
 
   </footer>
-  </div> <!--fin content wrapper-->
+
 </body>
 </html>
  <?php } else{

@@ -162,6 +162,30 @@ class Creditos extends conectar {//inicio de la clase
         return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	public function getCreditosMensuales(){
+		$conectar=parent::conexion();
+    	parent::set_names();
+
+		$sql = "select o.nombre,o.limite_credito,sum(c.monto) as acumulado,MIN(`fecha_fact`) AS min_fac, TIMESTAMPDIFF(DAY,MIN(`fecha_fact`),NOW()) as transc,o.id_optica from optica as o INNER join creditos as c on o.id_optica=c.id_optica where o.metodo_cobro='Mensual' group by c.id_optica;";
+		$sql=$conectar->prepare($sql);
+        $sql->execute();
+        return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	public function getCreditosGneral($optica){
+        $id_optica = implode("", $optica);
+
+        $conectar=parent::conexion();
+    	parent::set_names();
+
+        $sql = "SELECT c.id_credito,cf.n_correlativo,c.monto,o.paciente,o.codigo,op.nombre,s.direccion,c.estado,c.fecha_pago,c.saldo,cf.hora,cf.fecha,c.fecha_fact,c.hora_fact,TIMESTAMPDIFF(DAY,c.`fecha_fact`,NOW()) as dias FROM creditos as c INNER join creditos_fiscales as cf on c.codigo_orden=cf.codigo_orden inner join orden as o on cf.codigo_orden=o.codigo inner join optica as op on op.id_optica=c.id_optica INNER JOIN sucursal_optica as s on c.id_sucursal=s.id_sucursal where  c.id_optica=?;";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1, $id_optica);
+		$sql->execute();
+		return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+        //var_dump($argumentos);
+    }
+
 }//Fin clase
 
 //$creditos = new Creditos();
@@ -170,3 +194,4 @@ class Creditos extends conectar {//inicio de la clase
 
 ///////////////////////CREDITOS CON MORA
 //SELECT fecha_fact,(TIMESTAMPDIFF(DAY,`fecha_fact`,NOW())) AS transc FROM creditos where (TIMESTAMPDIFF(DAY,`fecha_fact`,NOW()) > 0);
+//SELECT `id_optica`,fecha_fact,max(TIMESTAMPDIFF(DAY,`fecha_fact`,NOW())) AS transc FROM creditos where (TIMESTAMPDIFF(DAY,`fecha_fact`,NOW()) > 0 ) GROUP by `id_optica`;
