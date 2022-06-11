@@ -32,7 +32,6 @@ function listarCobrosGeneral(id_optica){
 
 function dtTemplateCobros(table,route,...Args){
 
-      console.log(Args);
       tabla = $('#'+table).DataTable({      
       "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -45,16 +44,20 @@ function dtTemplateCobros(table,route,...Args){
         url:"../ajax/cobros.php?op="+ route,
         type : "POST",
         data: {Args:Args},
-        dataType : "json",       
+        dataType : "json",
+         
         error: function(e){
         console.log(e.responseText);
-      },           
-      },
+      },      
+      /*success: function(result) {
+        console.log(result.aaData)
+    },  */ 
+    },
   
       "bDestroy": true,
       "responsive": true,
       "bInfo":true,
-      "iDisplayLength": 25,//Por cada 10 registros hace una paginación
+      "iDisplayLength": 100,//Por cada 10 registros hace una paginación
         "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
         "language": { 
         "sProcessing":     "Procesando...",       
@@ -80,7 +83,23 @@ function dtTemplateCobros(table,route,...Args){
             "sSortDescending": ": Activar para ordenar la columna de manera descendente"   
         }}, //cerrando language
     });
+
+     
 }
+var arrayccf = [];
+function getValuesCcf(){
+  arrayccf = [];
+  $("#modal-abonos").modal();
+  let spans = document.getElementsByClassName("correlativos-ccf");
+  for(let i=0; i<spans.length; i++){
+    let id = spans[i].id;
+    let item = document.getElementById(id);
+    valor = item.dataset.spans;
+    arrayccf.push(valor);
+  }
+  console.log(arrayccf)
+ }
+
 
 $(document).ready(function(){
     $("#optica-cobro").change(function () {         
@@ -136,4 +155,7 @@ function verDetCobrosOptica(id_optica,nombre){
 
 }
 
+function cobrosParciales(){
+
+}
 initCobros();

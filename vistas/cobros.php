@@ -93,8 +93,69 @@ body{
     <!-- /.Modal FILTRAR CREDITOS -->
     
     <section>
+    <?php require_once("../modales/modal_detalle_cobros.php");?>
+  <!--MODAL ABONO--->
+  
+  <div class="modal" id="modal-abonos">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Monto abono</label>
+        <input type="number" class="form-control" id="monto-abono">     
+      </div>
+
+      <div class="eight"style="align-items: center">
+              <strong><h1 style="color:#034f84">FORMA DE PAGO</h1></strong>
+              <div class="row">
+                  <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input tipos_lentes check_clear" type="radio" id="lentevs" value="Visión Sencilla" name="tipo_lente" onClick='verTipoLente(this.id);'>
+                      <label class="form-check-label" for="lentevs" id="">Contado</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input tipos_lentes check_clear" type="radio" id="lentebf" value="Bifocal" name="tipo_lente" onClick='verTipoLente(this.id);'>
+                      <label class="form-check-label" for="lentebf" id="">Transf.</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input tipos_lentes check_clear" type="radio" id="lentemulti" value="Multifocal" name="tipo_lente" onClick='verTipoLente(this.id);'>
+                      <label class="form-check-label" for="lentemulti" id="">Cheque</label>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input tipos_lentes check_clear" type="radio" id="lentemulti" value="Multifocal" name="tipo_lente" onClick='verTipoLente(this.id);'>
+                      <label class="form-check-label" for="lentemulti" id="">Tarjeta c.</label>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">Doc. transaccion</label>
+        <input type="text" class="form-control" id="doc-abono">     
+      </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info btn-block">ABONAR</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  <!--FIN MODAL ABONO--->
  
-  <?php require_once("../modales/modal_detalle_cobros.php");?>
+
   
     </section>
     <!-- /.content -->

@@ -18,18 +18,15 @@
         </div>
 
         <div class=" form-group col-sm-2">
-          <button type="button" class="btn btn-block btn-outline-light  btn-flat" data-toggle="modal" data-target="#filtrar-creditos" style="color:black"><i class="	fas fa-hand-holding-usd" style="color:black"></i> Seleccionados</button>
+          <button type="button" class="btn btn-block btn-outline-light  btn-flat" data-toggle="modal" data-target="#filtrar-creditos" style="color:black" onClick="getValuesCcf()"><i class="	fas fa-hand-holding-usd" style="color:black"></i>Abonar</button>
         </div>
           
-        <div class=" form-group col-sm-2">
-            <button type="button" class="btn btn-block btn-outline-light  btn-flat" data-toggle="modal" data-target="#filtrar-creditos" style="color:black"><i class="	fas fa-hand-holding-usd"></i> Parcial</button>
-        </div>
-        
+               
       </div>
       <input type="hidden" id='id-optica'>
-      <table width="100%" class="table-hover table-bordered" id="datatable_listar_cobros" data-order='[[ 0, "desc" ]]' style="margin-top: 3px">        
+      <table width="100%" class="table-hover table-bordered" id="datatable_listar_cobros" data-order='[[ 3, "desc" ]]' style="margin-top: 3px">        
                <thead class="style_th bg-dark" style="color: white">
-                 <th><label><input type="checkbox" id="select-all-cobrar-chk" class="form-check-label" onClick="selectOrdenesCobrar()"> Sel.</label></th>
+                <!-- <th><label><input type="checkbox" id="select-all-cobrar-chk" class="form-check-label" onClick="selectOrdenesCobrar()"> Sel.</label></th> -->
                  <th>Doc.</th>
                  <th>Fecha fact.</th>
                  <th>Vencimiento</th>
