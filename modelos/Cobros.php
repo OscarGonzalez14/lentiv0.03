@@ -23,6 +23,21 @@ class Cobros extends conectar{
         //var_dump($argumentos);
     }
 
+    public function registrarCobro($arrayccf,$monto){
+        $conectar=parent::conexion();
+    	parent::set_names();
+        $data_abonos_obj = array();
+        $data_abonos_obj = json_decode($arrayccf);
+        foreach($data_abonos_obj as $k=>$v){
+            $monto = $v->montoccf;
+            $correlativo = $v-> correlativo;
+            echo $monto."<br>";
+            echo $correlativo."<br>";
+        }
+         
+
+    }
+
 
     
 }

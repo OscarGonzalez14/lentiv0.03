@@ -72,7 +72,7 @@ body{
         <li class="nav-item">
           <a class="nav-link" style="background:  #F5FCFF;cursor:pointer;"><i class="fas fa-hand-holding-usd" style="color: black" onClick="getCuentasMensuales()"></i> Contado</a>
         </li>        
-
+      
     </div>
 
 
@@ -146,7 +146,7 @@ body{
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-info btn-block">ABONAR</button>
+        <button type="button" class="btn btn-info btn-block" onClick="registrarCobro()">ABONAR</button>
       </div>
 
     </div>

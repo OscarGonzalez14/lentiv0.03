@@ -94,8 +94,13 @@ function getValuesCcf(){
   for(let i=0; i<spans.length; i++){
     let id = spans[i].id;
     let item = document.getElementById(id);
-    valor = item.dataset.spans;
-    arrayccf.push(valor);
+    let correlativo = item.dataset.spans;
+    let montoccf = item.dataset.montoccf;
+    let obj = {
+      correlativo : correlativo,
+      montoccf : montoccf
+    }
+    arrayccf.push(obj);
   }
   console.log(arrayccf)
  }
@@ -116,7 +121,7 @@ $(document).ready(function(){
         }
       });
     });
-    })
+  })
 });
 
 function listarSucursalesCobro(data){
@@ -155,7 +160,17 @@ function verDetCobrosOptica(id_optica,nombre){
 
 }
 
-function cobrosParciales(){
-
+function registrarCobro(){
+let monto = $("#monto-abono").val();
+  $.ajax({
+  url:"../ajax/cobros.php?op=registrar_cobros",
+  method:"POST",
+  data : {'arrayccf':JSON.stringify(arrayccf),'monto':monto},
+  cache:false,
+  dataType:"html",
+  success:function(data){   
+    console.log(data)
+  }
+  });
 }
 initCobros();

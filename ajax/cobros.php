@@ -62,8 +62,7 @@ switch ($_GET["op"]) {
             "sEcho"=>1, //Información para el datatables
             "iTotalRecords"=>count($datos), //enviamos el total registros al datatable
             "iTotalDisplayRecords"=>count($datos), //enviamos el total registros a visualizar
-            "aaData"=>$datos);
- 
+            "aaData"=>$datos); 
          echo json_encode($results);         
 
          break;
@@ -79,7 +78,7 @@ switch ($_GET["op"]) {
 
              $sub_array = array();
              //$sub_array[] = '<div style="text-align:center"><input type="checkbox" class="form-check-input ordenes_enviar_inabve" style="text-align: center" value="'.$row["codigo"].','.$row["monto"].'" id="n_item'.$cont.'"><span style="color:white">.</span></div>';
-             $sub_array[] = "<span id='ccf".$cont."' class='correlativos-ccf' data-spans=".$row["n_correlativo"]."*".$row["monto"].">".$row["n_correlativo"]."</span>";
+             $sub_array[] = "<span id='ccf".$cont."' class='correlativos-ccf' data-spans=".$row["n_correlativo"]." data-montoccf=".$row["monto"].">".$row["n_correlativo"]."</span>";
              $sub_array[] =  date("d-m-Y", strtotime($row["fecha_fact"]))." ".$row["hora_fact"];
              $sub_array[] =  date("d-m-Y", strtotime($row["fecha_pago"]));   
              $sub_array[] = $row["dias"];
@@ -101,5 +100,9 @@ switch ($_GET["op"]) {
  
             echo json_encode($results); 
             break;
+
+      case 'registrar_cobros':         
+         $cobros->registrarCobro($_POST["arrayccf"],$_POST["monto"]);
+         break;
 
 }
