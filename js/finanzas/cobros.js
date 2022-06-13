@@ -96,9 +96,13 @@ function getValuesCcf(){
     let item = document.getElementById(id);
     let correlativo = item.dataset.spans;
     let montoccf = item.dataset.montoccf;
+    let codigo = item.dataset.codigo;
+    let abonos = item.dataset.abonos;
     let obj = {
       correlativo : correlativo,
-      montoccf : montoccf
+      montoccf : montoccf,
+      codigo : codigo,
+      abonos : abonos
     }
     arrayccf.push(obj);
   }

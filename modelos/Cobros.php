@@ -23,21 +23,45 @@ class Cobros extends conectar{
         //var_dump($argumentos);
     }
 
-    public function registrarCobro($arrayccf,$monto){
+    public function registrarCobro($arrayccf,$montoAct){
         $conectar=parent::conexion();
     	parent::set_names();
+        $monto_act = $montoAct;
         $data_abonos_obj = array();
         $data_abonos_obj = json_decode($arrayccf);
+        echo "items ".count($data_abonos_obj);
         foreach($data_abonos_obj as $k=>$v){
             $monto = $v->montoccf;
             $correlativo = $v-> correlativo;
-            echo $monto."<br>";
-            echo $correlativo."<br>";
+            $codigo = $v->codigo;
+            $abonos = $v->abonos;
+            if($monto_act >= $monto){
+                /*================ Si monto actual > costo de orden se cancela la cuenta =============*/
+                $sum_abono = $abonos+$monto; 
+                $sql = "update creditos set saldo = '0', estado = 'Cancelado', abono = ? where codigo_orden = ?;";
+                $sql = $conectar->prepare($sql);
+                $sql->bindValue(1,$sum_abono);
+                $sql->bindValue(2,$codigo);
+                $sql->execute();
+                $monto_act = $monto_act - $monto;
+                echo " == Saldo1: $codigo ->".$monto_act;
+            }elseif($monto_act < $monto and $monto_act > 0){
+                $saldo = ($monto) - ($monto_act);
+                $abono = $monto_act;
+                $sum_abono = $abonos+$abono; 
+                $sql_u = "update creditos set saldo = ? , estado = 'Parcial', abono= ? where codigo_orden = ?;";
+                $sql_u = $conectar->prepare($sql_u);
+                $sql_u->bindValue(1,number_format($saldo,2,".",","));
+                $sql_u->bindValue(2,$sum_abono);
+                $sql_u->bindValue(3,$codigo);
+                $sql_u->execute();
+                $monto_act = $monto_act - $abono;
+                echo "Saldo2: ".$monto_act;
+            }
+           echo json_encode("OK!"); 
         }
          
 
     }
-
-
     
 }
