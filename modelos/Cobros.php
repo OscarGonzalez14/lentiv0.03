@@ -4,6 +4,20 @@ require_once("../config/conexion.php");
 
 class Cobros extends conectar{
 
+    private function registraAccionCobros($codigo,$accion,$observacion,$id_usuario){
+    $conectar=parent::conexion();
+    parent::set_names();
+    date_default_timezone_set('America/El_Salvador');$hoy = date("d-m-Y H:i:s");
+    $sql = "insert into acciones_orden values(null,?,?,?,?,?);";
+    $sql = $conectar->prepare($sql);
+    $sql->bindValue(1, $codigo);
+    $sql->bindValue(2, $hoy);
+    $sql->bindValue(3, $accion);
+    $sql->bindValue(4, $observacion);
+    $sql->bindValue(5, $id_usuario);
+    $sql->execute();
+    }
+
     public function getCreditosRango($argumentos){
         //$fecha = implode("", $argumentos[0]);
         $fechas = explode("/", $argumentos[0]);
@@ -26,10 +40,12 @@ class Cobros extends conectar{
     public function registrarCobro($arrayccf,$montoAct){
         $conectar=parent::conexion();
     	parent::set_names();
+
         $monto_act = $montoAct;
         $data_abonos_obj = array();
         $data_abonos_obj = json_decode($arrayccf);
-        echo "items ".count($data_abonos_obj);
+        $completos = 0;
+        $parciales =0;
         foreach($data_abonos_obj as $k=>$v){
             $monto = $v->montoccf;
             $correlativo = $v-> correlativo;
@@ -44,7 +60,8 @@ class Cobros extends conectar{
                 $sql->bindValue(2,$codigo);
                 $sql->execute();
                 $monto_act = $monto_act - $monto;
-                echo " == Saldo1: $codigo ->".$monto_act;
+                $completos++;
+                $this->registraAccionCobros($codigo,"Abono","Cancelacion",1);
             }elseif($monto_act < $monto and $monto_act > 0){
                 $saldo = ($monto) - ($monto_act);
                 $abono = $monto_act;
@@ -56,12 +73,14 @@ class Cobros extends conectar{
                 $sql_u->bindValue(3,$codigo);
                 $sql_u->execute();
                 $monto_act = $monto_act - $abono;
-                echo "Saldo2: ".$monto_act;
+                $parciales++;
+                $this->registraAccionCobros($codigo,"Abono","Abono parcial",1);
             }
-           echo json_encode("OK!"); 
+            
         }
          
-
+        $msjs = ['completos'=>"Se han realizado <span style='color: #1b837d'><b>$completos </b></span>abonos completos", 'parciales'=>"Se han realizado <span style='color: #0e2227'><b>$parciales </b></span>abonos parciales" ];
+        echo json_encode($msjs);
     }
     
 }

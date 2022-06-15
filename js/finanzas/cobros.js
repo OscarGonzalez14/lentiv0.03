@@ -1,3 +1,10 @@
+let Toast = Swal.mixin({
+  toast: true,
+  position: 'top-center',
+  showConfirmButton: false,
+  timer: 3000
+});
+
 
 function initCobros(){
   console.log("Reinciando js...")
@@ -106,8 +113,11 @@ function getValuesCcf(){
     }
     arrayccf.push(obj);
   }
-  console.log(arrayccf)
- }
+  console.log(arrayccf);
+/*sumar valores de objetos*/
+let total_abonos = arrayccf.reduce((sum, value) => ( sum + parseFloat(value.montoccf)), 0);
+  document.getElementById("totales-saldo").value = total_abonos;
+}
 
 
 $(document).ready(function(){
@@ -165,15 +175,37 @@ function verDetCobrosOptica(id_optica,nombre){
 }
 
 function registrarCobro(){
-let monto = $("#monto-abono").val();
+let monto = parseFloat($("#monto-abono").val());
+let total_saldos = parseFloat(document.getElementById("totales-saldo").value);
+
+console.log(typeof monto , typeof total_saldos)
+
+if(monto > total_saldos){
+  Toast.fire({icon: 'error',title: 'El abono excede el total de creditos.'}); 
+  return false;
+}
   $.ajax({
   url:"../ajax/cobros.php?op=registrar_cobros",
   method:"POST",
   data : {'arrayccf':JSON.stringify(arrayccf),'monto':monto},
   cache:false,
-  dataType:"html",
-  success:function(data){   
-    console.log(data)
+  dataType:"json",
+  success:function(data){
+    console.log(data);   
+    Swal.fire({
+      title: '<span style="font-size:15px">Cobro realizado exitosamente!</span>',
+      icon: 'success',
+      html:
+        '<span>'+data.completos+'</span><br>' +
+        '<span>'+data.parciales+'</span> ',
+      showCloseButton: true,
+      focusConfirm: true,
+      confirmButtonText: '<i class="fa fa-print"></i> Imprimir recibo de abono!'
+    })
+    ///Actualizar Datatables!!
+    $("#modal-abonos").modal('hide');
+    $("#datatable_listar_cobros").DataTable().ajax.reload(); 
+
   }
   });
 }

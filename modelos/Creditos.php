@@ -167,7 +167,7 @@ class Creditos extends conectar {//inicio de la clase
 		$conectar=parent::conexion();
     	parent::set_names();
 
-		$sql = "select o.nombre,o.limite_credito,sum(c.monto) as acumulado,MIN(`fecha_fact`) AS min_fac, TIMESTAMPDIFF(DAY,MIN(`fecha_fact`),NOW()) as transc,o.id_optica from optica as o INNER join creditos as c on o.id_optica=c.id_optica where o.metodo_cobro='Mensual' group by c.id_optica;";
+		$sql = "select o.nombre,o.limite_credito,sum(c.saldo) as acumulado,MIN(`fecha_fact`) AS min_fac, TIMESTAMPDIFF(DAY,MIN(`fecha_fact`),NOW()) as transc,o.id_optica from optica as o INNER join creditos as c on o.id_optica=c.id_optica where o.metodo_cobro='Mensual' group by c.id_optica HAVING sum(c.saldo) > 0;";
 		$sql=$conectar->prepare($sql);
         $sql->execute();
         return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);

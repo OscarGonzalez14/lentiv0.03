@@ -99,6 +99,10 @@ body{
   <div class="modal" id="modal-abonos">
   <div class="modal-dialog modal-xs">
     <div class="modal-content">
+      <div class="modal-header" style="background: #2a2a2a; padding:5px;color:white; text-align:center">
+      <h4 class="modal-title  w-100 text-center position-absolute" id="title-cobros-gen" style='font-size:15px'> ABONOS</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
       <!-- Modal body -->
       <div class="modal-body">
@@ -143,7 +147,7 @@ body{
         <input type="text" class="form-control" id="doc-abono">     
       </div>
       </div>
-
+      <input type="hidden" id="totales-saldo">
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-info btn-block" onClick="registrarCobro()">ABONAR</button>
