@@ -2,12 +2,13 @@
 function init_fact(){
   $('#codigo-orden-fact').val("");
   $('#codigo-orden-fact').focus();
+  get_ccf_hoy();
   
 }
 
 ///////////////////////// TEMPLATE DATATABLE /////////////
 function get_ccf_hoy(){
-  dtTemplate("datatable_ccf","obtener_creditos_rango")
+  dtTemplate("datatable_ccf","listar_ccf_diarios")
 }
 function dtTemplate(table,route){
 	tabla = $('#'+table).DataTable({      

@@ -142,10 +142,8 @@ class Creditos extends conectar {//inicio de la clase
 
 		//$sql2 = "insert into "
 
-		if ($sql->rowCount() > 0 &&  $sql2->rowCount() > 0){
-			
-			$data = ['msj'=>'ccfreg','correlativo'=>$correlativo,'fecha_pago'=> date("d-m-Y",strtotime($diaPago))];
-			
+		if ($sql->rowCount() > 0 &&  $sql2->rowCount() > 0){			
+			$data = ['msj'=>'ccfreg','correlativo'=>$correlativo,'fecha_pago'=> date("d-m-Y",strtotime($diaPago))];			
 		}else{
 			$data = ['msj'=>'ccferror'];
 		}

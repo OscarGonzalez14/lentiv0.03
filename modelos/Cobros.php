@@ -37,7 +37,7 @@ class Cobros extends conectar{
         //var_dump($argumentos);
     }
 
-    public function registrarCobro($arrayccf,$montoAct){
+    public function registrarCobro($arrayccf,$montoAct,$id_usuario){
         $conectar=parent::conexion();
     	parent::set_names();
 
@@ -74,7 +74,7 @@ class Cobros extends conectar{
                 $sql_u->execute();
                 $monto_act = $monto_act - $abono;
                 $parciales++;
-                $this->registraAccionCobros($codigo,"Abono","Abono parcial",1);
+                $this->registraAccionCobros($codigo,"Abono","Abono parcial",$id_usuario);
             }
             
         }

@@ -102,7 +102,7 @@ switch ($_GET["op"]) {
             break;
 
       case 'registrar_cobros':         
-         $cobros->registrarCobro($_POST["arrayccf"],$_POST["monto"]);
+         $cobros->registrarCobro($_POST["arrayccf"],$_POST["monto"],$_POST["id_usuario"]);
          break;
 
 }

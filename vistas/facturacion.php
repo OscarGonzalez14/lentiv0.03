@@ -92,7 +92,7 @@ body{
 
 
         <div class="col-md-12">
-        <div class="card card-info collapsed-card">
+        <div class="card card-info">
           <div class="card-header">
               <h5 class="card-title" style="font-size: 16px;"> COMPROBANTES DE CREDITO FISCAL</h5>
                 <div class="card-tools">

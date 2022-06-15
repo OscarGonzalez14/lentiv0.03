@@ -177,6 +177,7 @@ function verDetCobrosOptica(id_optica,nombre){
 function registrarCobro(){
 let monto = parseFloat($("#monto-abono").val());
 let total_saldos = parseFloat(document.getElementById("totales-saldo").value);
+let id_usuario = document.getElementById("id_usuario").value;
 
 console.log(typeof monto , typeof total_saldos)
 
@@ -187,7 +188,7 @@ if(monto > total_saldos){
   $.ajax({
   url:"../ajax/cobros.php?op=registrar_cobros",
   method:"POST",
-  data : {'arrayccf':JSON.stringify(arrayccf),'monto':monto},
+  data : {'arrayccf':JSON.stringify(arrayccf),'monto':monto,'id_usuario':id_usuario},
   cache:false,
   dataType:"json",
   success:function(data){
