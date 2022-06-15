@@ -92,6 +92,7 @@ function getDataOrdenFact(){
         $("#dia_de_pago").val(data.fecha_cobro);
         $("#fecha_registro").val(data.fecha_registro);
         $("#metodo_cobro").val(data.metodo_cobro);
+        $("#id_orden").val(data.id_orden);
         confirmaRegistro();
       }         
     }
@@ -204,11 +205,13 @@ function registraCCF(){
   let dia_de_pago = $("#dia_de_pago").val();
   let fecha_registro = $("#fecha_registro").val();
   let metodo_cobro = $("#metodo_cobro").val();
+  let id_orden = $("#id_orden").val();
+  let id_usuario = $("#id_usuario").val();
   /*======== SE REGISTRA CCF========*/
    $.ajax({
       url:"../ajax/creditos.php?op=registrarCCF",
       method:"POST",
-      data : {codigo:codigo,paciente:paciente,id_optica:id_optica,id_sucursal:id_sucursal,monto_orden:monto_orden,dia_de_pago:dia_de_pago,fecha_registro:fecha_registro,metodo_cobro:metodo_cobro},
+      data : {codigo:codigo,paciente:paciente,id_optica:id_optica,id_sucursal:id_sucursal,monto_orden:monto_orden,dia_de_pago:dia_de_pago,fecha_registro:fecha_registro,metodo_cobro:metodo_cobro,id_orden:id_orden,id_usuario:id_usuario},
       cache:false,
       dataType:"json",
       success:function(data){

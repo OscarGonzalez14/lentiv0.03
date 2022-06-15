@@ -105,6 +105,7 @@ function getValuesCcf(){
     let montoccf = item.dataset.montoccf;
     let codigo = item.dataset.codigo;
     let abonos = item.dataset.abonos;
+    let id_orden = item.dataset.idorden;
     let obj = {
       correlativo : correlativo,
       montoccf : montoccf,

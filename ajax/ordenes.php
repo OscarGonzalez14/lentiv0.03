@@ -139,6 +139,7 @@ case 'get_ordenes':
 				$data["fecha_registro"] = $key["fecha_registro"];
 				$data["fecha_cobro"] = $key["fecha_cobro"];
 				$data["metodo_cobro"] = $key["metodo_cobro"];
+				$data["id_orden"] = $key["id_orden"];
 			}
 
 				echo json_encode($data);

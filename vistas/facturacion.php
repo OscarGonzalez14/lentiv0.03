@@ -134,6 +134,8 @@ body{
     <input type="hidden" id="dia_de_pago" class="data-fct">
     <input type="hidden" id="fecha_registro" class="data-fct">
     <input type="hidden" id="metodo_cobro" class="data-fct">
+    <input type="hidden" id="id_orden" class="data-fct">
+    <input type="hidden" id="id_usuario" value="<?php echo $_SESSION['id_usuario'];?>">
    </div>
 
   <footer class="main-footer">

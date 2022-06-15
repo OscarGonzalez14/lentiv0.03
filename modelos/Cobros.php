@@ -36,7 +36,18 @@ class Cobros extends conectar{
 		return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         //var_dump($argumentos);
     }
+    private function registrarAbono($data){
+        $conectar=parent::conexion();
+    	parent::set_names();
+        $sql2 = "insert into abonos values(null,?,?,?,?,?,?,?,?,?,?,?,?);";
+        $sql2 = $conectar->prepare($sql2);
+        $sql2->bindValue(1, $correlativo_ing);
+        $sql2->bindValue(2, $n_orden);
+        $sql2->bindValue(3, $optica);
+        $sql2->bindValue(4, $sucursal);
+        $sql2->execute();
 
+    }
     public function registrarCobro($arrayccf,$montoAct,$id_usuario){
         $conectar=parent::conexion();
     	parent::set_names();
@@ -51,6 +62,7 @@ class Cobros extends conectar{
             $correlativo = $v-> correlativo;
             $codigo = $v->codigo;
             $abonos = $v->abonos;
+            $id_orden = $v->idorden;
             if($monto_act >= $monto){
                 /*================ Si monto actual > costo de orden se cancela la cuenta =============*/
                 $sum_abono = $abonos+$monto; 
@@ -61,6 +73,7 @@ class Cobros extends conectar{
                 $sql->execute();
                 $monto_act = $monto_act - $monto;
                 $completos++;
+                $this->registrarAbono($data);
                 $this->registraAccionCobros($codigo,"Abono","Cancelacion",1);
             }elseif($monto_act < $monto and $monto_act > 0){
                 $saldo = ($monto) - ($monto_act);

@@ -88,7 +88,7 @@ class Creditos extends conectar {//inicio de la clase
 
     ################## REGISTRAR CCF ################
 
-	public function registrarCCF($codigo,$paciente,$id_optica,$id_sucursal,$monto_orden,$dia_de_pago,$fecha_registro,$metodo_cobro){
+	public function registrarCCF($codigo,$paciente,$id_optica,$id_sucursal,$monto_orden,$dia_de_pago,$fecha_registro,$metodo_cobro,$id_orden,$id_usuario){
 	    $conectar=parent::conexion();
     	parent::set_names();
 
@@ -106,9 +106,8 @@ class Creditos extends conectar {//inicio de la clase
 
         $tipo_credito = "";
         $estado = "Pendiente";
-        $id_usuario = 1;
         $abono = 0;
-		$sql = "insert into creditos values(null,?,?,?,?,?,?,?,?,?,?,?,?);";
+		$sql = "insert into creditos values(null,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		$sql = $conectar->prepare($sql);
 		$sql->bindValue(1, $tipo_credito);
 		$sql->bindValue(2, $monto_orden);
@@ -122,6 +121,7 @@ class Creditos extends conectar {//inicio de la clase
 		$sql->bindValue(10, $id_usuario);
 		$sql->bindValue(11, $monto_orden);
 		$sql->bindValue(12, $abono);
+		$sql->bindValue(13, $id_orden);
 		$sql->execute();
 
 		$correlativo_ccf = $this->getCorrelativoCCF();
@@ -177,12 +177,12 @@ class Creditos extends conectar {//inicio de la clase
         $conectar=parent::conexion();
     	parent::set_names();
 
-        $sql = "SELECT c.id_credito,cf.n_correlativo,c.monto,o.paciente,o.codigo,op.nombre,s.direccion,c.estado,c.fecha_pago,c.saldo,cf.hora,cf.fecha,c.fecha_fact,c.hora_fact,TIMESTAMPDIFF(DAY,c.`fecha_fact`,NOW()) as dias,c.abono FROM creditos as c INNER join creditos_fiscales as cf on c.codigo_orden=cf.codigo_orden inner join orden as o on cf.codigo_orden=o.codigo inner join optica as op on op.id_optica=c.id_optica INNER JOIN sucursal_optica as s on c.id_sucursal=s.id_sucursal where  c.id_optica=? and c.saldo > 0 order by dias DESC;";
+        $sql = "SELECT c.id_credito,cf.n_correlativo,c.monto,o.paciente,o.codigo,op.nombre,s.direccion,c.estado,c.fecha_pago,c.saldo,cf.hora,cf.fecha,c.fecha_fact,c.hora_fact,TIMESTAMPDIFF(DAY,c.`fecha_fact`,NOW()) as dias,c.abono,c.id_orden FROM creditos as c INNER join creditos_fiscales as cf on c.codigo_orden=cf.codigo_orden inner join orden as o on cf.codigo_orden=o.codigo inner join optica as op on op.id_optica=c.id_optica INNER JOIN sucursal_optica as s on c.id_sucursal=s.id_sucursal where  c.id_optica=? and c.saldo > 0 order by dias DESC;";
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1, $id_optica);
 		$sql->execute();
 		return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-        //var_dump($argumentos);
+        
     }
 
 }//Fin clase
