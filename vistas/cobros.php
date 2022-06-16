@@ -148,7 +148,7 @@ body{
       </div>
       </div>
       <input type="hidden" id="totales-saldo">
-      <input type="hidden" name="" id="id_usuario">
+      <input type="hidden" name="" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>">
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-info btn-block" onClick="registrarCobro()">ABONAR</button>

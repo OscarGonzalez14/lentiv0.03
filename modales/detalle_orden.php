@@ -10,7 +10,9 @@
         </button>
       </div>
         <div class="modal-body">
+
           <table width="100%" style="margin-top:0px;">
+          
             <tr>
               <th colspan="10"><img src="../dist/img/lenti_logo.png" width="85" height="65"/></th>
               <th colspan="70" style="text-align: center;margin-top: 0px;color:#0088b6;font-size:14px;font-family: Helvetica, Arial, sans-serif;"><b>ORDEN DE PRODUCCIÓN</b></th>

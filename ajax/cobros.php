@@ -75,10 +75,9 @@ switch ($_GET["op"]) {
          
          foreach ($data as $row) {
             $saldo_acumulado = $saldo_acumulado + $row["saldo"];
-
              $sub_array = array();
              //$sub_array[] = '<div style="text-align:center"><input type="checkbox" class="form-check-input ordenes_enviar_inabve" style="text-align: center" value="'.$row["codigo"].','.$row["monto"].'" id="n_item'.$cont.'"><span style="color:white">.</span></div>';    
-             $sub_array[] = "<span id='ccf".$cont."' class='correlativos-ccf' data-spans=".$row["n_correlativo"]." data-montoccf=".$row["saldo"]." data-codigo=".$row["codigo"]." data-abonos=".$row["abono"]." data-idorden=".$row["id_orden"].">".$row["id_orden"]."</span>";
+             $sub_array[] = "<span id='ccf".$cont."' class='correlativos-ccf' data-spans=".$row["n_correlativo"]." data-montoccf=".$row["saldo"]." data-codigo=".$row["codigo"]." data-abonos=".$row["abono"]." data-idorden=".$row["id_orden"]." data-idoptica=".$row["id_optica"]." data-idsucursal=".$row["id_sucursal"].">".$row["id_orden"]."</span>";
              $sub_array[] =  date("d-m-Y", strtotime($row["fecha_fact"]))." ".$row["hora_fact"];
              $sub_array[] =  date("d-m-Y", strtotime($row["fecha_pago"]));   
              $sub_array[] = $row["dias"];

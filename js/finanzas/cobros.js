@@ -110,7 +110,10 @@ function getValuesCcf(){
       correlativo : correlativo,
       montoccf : montoccf,
       codigo : codigo,
-      abonos : abonos
+      abonos : abonos,
+      id_orden : id_orden,
+      id_optica : item.dataset.idoptica,
+      id_sucursal : item.dataset.idsucursal
     }
     arrayccf.push(obj);
   }
@@ -180,7 +183,7 @@ let monto = parseFloat($("#monto-abono").val());
 let total_saldos = parseFloat(document.getElementById("totales-saldo").value);
 let id_usuario = document.getElementById("id_usuario").value;
 
-console.log(typeof monto , typeof total_saldos)
+console.log(id_usuario)
 
 if(monto > total_saldos){
   Toast.fire({icon: 'error',title: 'El abono excede el total de creditos.'}); 
