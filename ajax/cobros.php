@@ -100,8 +100,17 @@ switch ($_GET["op"]) {
             echo json_encode($results); 
             break;
 
-      case 'registrar_cobros':         
-         $cobros->registrarCobro($_POST["arrayccf"],$_POST["monto"],$_POST["id_usuario"]);
+      case 'registrar_cobros':
+        $correlativo = $cobros->getCorrelativoRecibo();
+        $corr = substr($correlativo,3,20);
+        $corr= "RL-".(int) $corr+1;
+        
+        $validaCorrelativo = $cobros->validaExisteCorr($corr);
+        if (is_array($validaCorrelativo)==true and count($validaCorrelativo)==0 ){
+        $cobros->registrarCobro($_POST["arrayccf"],$_POST["monto"],$_POST["id_usuario"],$corr);
+        }else{
+         echo json_encode("Error");
+        }
          break;
 
 }

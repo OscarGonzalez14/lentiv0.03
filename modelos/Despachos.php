@@ -72,7 +72,7 @@ class Despachos extends Conectar{
             $sql3 = $conectar->prepare($sql3);
             $sql3->bindValue(1, $n_orden);
             $sql3->bindValue(2, $fecha." ".$hora);
-            $sql3->bindValue(3, $accion);
+            $sql3->bindValue(3, $accion . " * ".$correlativo_ing);
             $sql3->bindValue(4, $observacion);
             $sql3->bindValue(5, $_POST["id_usuario"]);
             $sql3->execute();

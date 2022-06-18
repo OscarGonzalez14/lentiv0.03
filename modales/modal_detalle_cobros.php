@@ -19,7 +19,11 @@
 
         <div class=" form-group col-sm-2">
           <button type="button" class="btn btn-block btn-outline-light  btn-flat" data-toggle="modal" data-target="#filtrar-creditos" style="color:black" onClick="getValuesCcf()"><i class="	fas fa-hand-holding-usd" style="color:black"></i>Abonar</button>
-        </div>        
+        </div>     
+        
+        <div class=" form-group col-sm-2">
+          <button type="button" class="btn btn-block btn-outline-light  btn-flat" data-toggle="modal" data-target="#filtrar-creditos" style="color:black" onClick="getValuesCcf()"><i class="fas fa-book" style="color:black"></i>Hist. abonos</button>
+        </div>   
                
       </div>
       <input type="hidden" id='id-optica'>

@@ -39,6 +39,7 @@ class Cobros extends conectar{
     private function registrarAbono($codigo,$monto,$abonos,$saldo,$recibo,$n_doc,$hoy,$hora,$id_orden,$id_optica,$id_sucursal,$id_usuario){
         $conectar=parent::conexion();
     	parent::set_names();
+        
         $sql2 = "insert into abonos values(null,?,?,?,?,?,?,?,?,?,?,?,?);";
         $sql2 = $conectar->prepare($sql2);
         $sql2->bindValue(1, $codigo);
@@ -56,7 +57,24 @@ class Cobros extends conectar{
         $sql2->execute();
     }
     
-    public function registrarCobro($arrayccf,$montoAct,$id_usuario){
+    public function validaExisteCorr($corr){
+        $conectar=parent::conexion();
+        parent::set_names();
+        $sql = "select n_recibo from recibos where n_recibo = ?;";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$corr);
+        $sql->execute();
+        return $resultado=$sql->fetchAll();       
+    }   
+    public function getCorrelativoRecibo(){
+        $conectar= parent::conexion();
+        $sql= "select n_recibo from recibos order by id_recibo DESC limit 1;";
+        $sql=$conectar->prepare($sql);
+        $sql->execute();
+        return $sql->fetchColumn();
+    }
+
+    public function registrarCobro($arrayccf,$montoAct,$id_usuario,$corr){
         $conectar=parent::conexion();
     	parent::set_names();
         date_default_timezone_set('America/El_Salvador');$hoy = date("Y-m-d"); $hora = date("H:i:s");
@@ -65,6 +83,7 @@ class Cobros extends conectar{
         $data_abonos_obj = json_decode($arrayccf);
         $completos = 0;
         $parciales =0;
+
         foreach($data_abonos_obj as $k=>$v){
             $monto = $v->montoccf;
             $correlativo = $v-> correlativo;
@@ -101,7 +120,7 @@ class Cobros extends conectar{
             
         }
          
-       $msjs = ['completos'=>"Se han realizado <span style='color: #1b837d'><b>$completos </b></span>abonos completos", 'parciales'=>"Se han realizado <span style='color: #0e2227'><b>$parciales </b></span>abonos parciales" ];
+       $msjs = ['completos'=>"Se han realizado <span style='color: #1b837d'><b>$completos </b></span>abonos completos", 'parciales'=>"Se han realizado <span style='color: #0e2227'><b>$parciales </b></span>abonos parciales",'correlativo'=>$corr];
        echo json_encode($msjs);
 
        //echo json_encode()
