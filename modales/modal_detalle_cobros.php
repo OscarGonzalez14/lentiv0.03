@@ -26,7 +26,7 @@
         </div>   
                
       </div>
-      <input type="hidden" id='id-optica'>
+      <input type="text" id='id-optica'>
       <table width="100%" class="table-hover table-bordered" id="datatable_listar_cobros" data-order='[[ 3, "desc" ]]' style="margin-top: 3px">        
                <thead class="style_th bg-dark" style="color: white">
                 <!-- <th><label><input type="checkbox" id="select-all-cobrar-chk" class="form-check-label" onClick="selectOrdenesCobrar()"> Sel.</label></th> -->

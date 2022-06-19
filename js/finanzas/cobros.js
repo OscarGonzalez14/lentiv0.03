@@ -28,7 +28,6 @@ function getCuentasMensuales(){
   dtTemplateCobros("dt_cobros_mensuales","listar_creditos_mensuales","0");
 }
 
-
 function listarCobrosRango(fecha,optica){
   dtTemplateCobros("datatable_listar_cobros","obtener_creditos_rango",fecha,optica)
 }
@@ -182,8 +181,12 @@ function registrarCobro(){
 let monto = parseFloat($("#monto-abono").val());
 let total_saldos = parseFloat(document.getElementById("totales-saldo").value);
 let id_usuario = document.getElementById("id_usuario").value;
+let forma_cobro =  $("input[type='radio'][name='forma-cobro']:checked").val(); 
+let n_trans = document.getElementById("doc-abono").value;
+let banco_cobro = document.getElementById("banco-cobro").value;
+let id_optica = document.getElementById("id-optica").value;
 
-console.log(id_usuario)
+console.log(forma_cobro)
 
 if(monto > total_saldos){
   Toast.fire({icon: 'error',title: 'El abono excede el total de creditos.'}); 
@@ -192,7 +195,7 @@ if(monto > total_saldos){
   $.ajax({
   url:"../ajax/cobros.php?op=registrar_cobros",
   method:"POST",
-  data : {'arrayccf':JSON.stringify(arrayccf),'monto':monto,'id_usuario':id_usuario},
+  data : {'arrayccf':JSON.stringify(arrayccf),'monto':monto,'id_usuario':id_usuario,'forma_cobro': forma_cobro,'n_trans': n_trans,'banco_cobro': banco_cobro,'id_optica':id_optica},
   cache:false,
   dataType:"json",
   success:function(data){
@@ -214,4 +217,6 @@ if(monto > total_saldos){
   }
   });
 }
+
+
 initCobros();

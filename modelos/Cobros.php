@@ -36,7 +36,7 @@ class Cobros extends conectar{
         //var_dump($argumentos);
     }
     
-    private function registrarAbono($codigo,$monto,$abonos,$saldo,$recibo,$n_doc,$hoy,$hora,$id_orden,$id_optica,$id_sucursal,$id_usuario){
+    private function registrarAbono($codigo,$monto,$abonos,$saldo,$recibo,$n_doc,$hoy,$hora,$id_orden,$id_optica,$id_sucursal,$id_usuario,$corr_recibo){
         $conectar=parent::conexion();
     	parent::set_names();
         
@@ -55,6 +55,16 @@ class Cobros extends conectar{
         $sql2->bindValue(11, $id_usuario);
         $sql2->bindValue(12, $id_orden);
         $sql2->execute();
+
+        $sql = "insert into detalle_recibo values(null,?,?,?,?,?,?);";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $n_doc);
+        $sql->bindValue(2, $id_optica);
+        $sql->bindValue(3, $id_sucursal);
+        $sql->bindValue(4, $id_orden);
+        $sql->bindValue(5, $monto);
+        $sql->bindValue(6, $corr_recibo);
+        $sql->execute();
     }
     
     public function validaExisteCorr($corr){
@@ -74,7 +84,7 @@ class Cobros extends conectar{
         return $sql->fetchColumn();
     }
 
-    public function registrarCobro($arrayccf,$montoAct,$id_usuario,$corr){
+    public function registrarCobro($arrayccf,$montoAct,$id_usuario,$corr,$forma_cobro,$n_trans,$banco_cobro,$id_optica){
         $conectar=parent::conexion();
     	parent::set_names();
         date_default_timezone_set('America/El_Salvador');$hoy = date("Y-m-d"); $hora = date("H:i:s");
@@ -84,6 +94,19 @@ class Cobros extends conectar{
         $completos = 0;
         $parciales =0;
 
+        $rcb = "insert into recibos values(null,?,?,?,?,?,?,?,?,?);";
+        $rcb = $conectar->prepare($rcb);
+        $rcb->bindValue(1, $corr);
+        $rcb->bindValue(2, $montoAct);
+        $rcb->bindValue(3, $hoy);
+        $rcb->bindValue(4, $hora);
+        $rcb->bindValue(5, $id_optica);
+        $rcb->bindValue(6, $id_usuario);
+        $rcb->bindValue(7, $forma_cobro);
+        $rcb->bindValue(8, $n_trans);
+        $rcb->bindValue(9, $banco_cobro);
+        $rcb->execute();
+        
         foreach($data_abonos_obj as $k=>$v){
             $monto = $v->montoccf;
             $correlativo = $v-> correlativo;
@@ -99,8 +122,8 @@ class Cobros extends conectar{
                 $sql->bindValue(2,$codigo);
                 $sql->execute();
                 $monto_act = $monto_act - $monto;
-                $completos++;
-                $this->registrarAbono($codigo,$monto,$abonos,"0","R-1",$correlativo,$hoy,$hora,$id_orden,$v->id_optica,$v->id_sucursal,$id_usuario);
+                $completos++;               
+                $this->registrarAbono($codigo,$monto,$abonos,"0",$corr,$correlativo,$hoy,$hora,$id_orden,$v->id_optica,$v->id_sucursal,$id_usuario,$corr);
                 $this->registraAccionCobros($codigo,"Abono","Cancelacion",1);
             }elseif($monto_act < $monto and $monto_act > 0){
                 $saldo = ($monto) - ($monto_act);
@@ -113,12 +136,12 @@ class Cobros extends conectar{
                 $sql_u->bindValue(3,$codigo);
                 $sql_u->execute();
                 $monto_act = $monto_act - $abono;
-                $parciales++;
-                $this->registrarAbono($codigo,$monto,$abonos,"0","R-1",$correlativo,$hoy,$hora,$id_orden,$v->id_optica,$v->id_sucursal,$id_usuario);
+                $parciales++;               
+                $this->registrarAbono($codigo,$monto,$abonos,"0",$corr,$correlativo,$hoy,$hora,$id_orden,$v->id_optica,$v->id_sucursal,$id_usuario,$corr);
                 $this->registraAccionCobros($codigo,"Abono","Abono parcial",$id_usuario);
             }
             
-        }
+        }      
          
        $msjs = ['completos'=>"Se han realizado <span style='color: #1b837d'><b>$completos </b></span>abonos completos", 'parciales'=>"Se han realizado <span style='color: #0e2227'><b>$parciales </b></span>abonos parciales",'correlativo'=>$corr];
        echo json_encode($msjs);

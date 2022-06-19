@@ -116,36 +116,55 @@ body{
               <div class="row">
                   <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input tipos_lentes check_clear" type="radio" id="lentevs" value="Visión Sencilla" name="tipo_lente" onClick='verTipoLente(this.id);'>
+                      <input class="form-check-input check_clear" type="radio" id="contado_cobro" value="Contado" name="forma-cobro">
                       <label class="form-check-label" for="lentevs" id="">Contado</label>
                     </div>
                   </div>
                   <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input tipos_lentes check_clear" type="radio" id="lentebf" value="Bifocal" name="tipo_lente" onClick='verTipoLente(this.id);'>
-                      <label class="form-check-label" for="lentebf" id="">Transf.</label>
+                      <input class="form-check-input check_clear" id="transf"  type="radio" value="Transferencia" name="forma-cobro">
+                      <label class="form-check-label" for="transf" id="">Transf.</label>
                     </div>
                   </div>
                   <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input tipos_lentes check_clear" type="radio" id="lentemulti" value="Multifocal" name="tipo_lente" onClick='verTipoLente(this.id);'>
-                      <label class="form-check-label" for="lentemulti" id="">Cheque</label>
+                      <input class="form-check-input check_clear"  id="chq" type="radio" value="Cheque" name="forma-cobro" >
+                      <label class="form-check-label" for="chq" id="">Cheque</label>
                     </div>
                   </div>
 
                   <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input tipos_lentes check_clear" type="radio" id="lentemulti" value="Multifocal" name="tipo_lente" onClick='verTipoLente(this.id);'>
-                      <label class="form-check-label" for="lentemulti" id="">Tarjeta c.</label>
+                      <input class="form-check-input  check_clear"  id="tarjetac" type="radio" value="Tarjeta Credito" name="forma-cobro">
+                      <label class="form-check-label" for="tarjetac" id="">Tarjeta c.</label>
                     </div>
                   </div>
               </div>
             </div>
+      
+    <div class="form-row datos-bhanco" id="datos-banco">
 
-      <div class="form-group">
+      <div class="form-group col-sm-6">
         <label for="exampleInputEmail1">Doc. transaccion</label>
         <input type="text" class="form-control" id="doc-abono">     
       </div>
+
+      <div class="form-group col-sm-6 select2-purple">
+        <label for="banco-cobro">Banco</label>
+        <select class="form-control select2" id="banco-cobro" multiple="multiple" data-placeholder="Seleccionar banco" data-dropdown-css-class="select2-purple" >
+        <option value="0">Selecccionar banco ...</option>
+        <option value="Agricola">Agricola</option>
+        <option value="Cuscatlan">Cuscatlan</option>
+        <option value="Davivienda">Davivienda</option>
+        <option value="BAC">BAC</option>
+        <option value="Promerica">Promerica</option>
+        <option value="Hipotecario">Hipotecario</option>
+        <option value="G&T Continental">G&T Continental</option>       
+      </select>
+      </div>
+
+    </div>
+
       </div>
       <input type="hidden" id="totales-saldo">
       <input type="hidden" name="" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>">
