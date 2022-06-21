@@ -81,7 +81,7 @@ switch ($_GET["op"]) {
              $sub_array[] =  date("d-m-Y", strtotime($row["fecha_fact"]))." ".$row["hora_fact"];
              $sub_array[] =  date("d-m-Y", strtotime($row["fecha_pago"]));   
              $sub_array[] = $row["dias"];
-             $sub_array[] = $row["codigo"]." - ".$row["paciente"];  
+             $sub_array[] = "<span id=".$row["codigo"].">".$row["codigo"]." - ".$row["paciente"]."</span>";  
              $sub_array[] = $row["direccion"];
              $sub_array[] = "$".number_format($row["monto"],2,".",",");  
              $sub_array[] = "$".number_format($row["abono"],2,".",",");
@@ -141,5 +141,36 @@ switch ($_GET["op"]) {
             echo json_encode($results); 
             break;
          break;
+
+         case "detalle_recibos":
+            $args = implode(",",$_POST["Args"]);
+            $argumentos = explode(",",$args);
+            $det = $cobros->getDetalleRecibo($argumentos[0],$argumentos[1]);
+            foreach ($det as $row) {
+               $sub_array = array();
+               $abono_act = ($row["monto_orden"])-($row["saldo"]);
+                $sub_array[] = $row["id_abono"];
+                $sub_array[] = $row["codigo"];
+                $sub_array[] = $row["correlativo_recibo"];
+                $sub_array[] = $row["direccion"];
+                $sub_array[] = $row["paciente"];
+                $sub_array[] = $row["n_doc"];
+                $sub_array[] = "$".number_format($row["monto_orden"],2,".",",");
+                $sub_array[] = "$".number_format($abono_act,2,".",",");    
+                $sub_array[] =  date("d-m-Y", strtotime($row["fecha"]))." ".$row["hora"];
+                $sub_array[] = "$".number_format($row["saldo"],2,".",",");
+                $datos[] = $sub_array;             
+                
+             }
+        
+            $results = array(
+               "sEcho"=>1, //Información para el datatables
+               "iTotalRecords"=>count($datos), //enviamos el total registros al datatable
+               "iTotalDisplayRecords"=>count($datos), //enviamos el total registros a visualizar
+               "aaData"=>$datos);
+    
+               echo json_encode($results); 
+               break;
+            break;
 
 }

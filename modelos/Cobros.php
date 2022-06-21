@@ -93,7 +93,8 @@ class Cobros extends conectar{
         $data_abonos_obj = json_decode($arrayccf);
         $completos = 0;
         $parciales =0;
-
+        $abonos_comp = array();
+        $abonos_parc = array();
         $rcb = "insert into recibos values(null,?,?,?,?,?,?,?,?,?);";
         $rcb = $conectar->prepare($rcb);
         $rcb->bindValue(1, $corr);
@@ -125,6 +126,7 @@ class Cobros extends conectar{
                 $completos++;               
                 $this->registrarAbono($codigo,$monto,$abonos,"0",$corr,$correlativo,$hoy,$hora,$id_orden,$v->id_optica,$v->id_sucursal,$id_usuario,$corr);
                 $this->registraAccionCobros($codigo,"Abono - Recibo: ".$corr,"Cancelacion",1);
+                array_push($abonos_comp, $codigo);
             }elseif($monto_act < $monto and $monto_act > 0){
                 $saldo = ($monto) - ($monto_act);
                 $abono = $monto_act;
@@ -139,11 +141,12 @@ class Cobros extends conectar{
                 $parciales++;               
                 $this->registrarAbono($codigo,$monto,$abonos,$saldo,$corr,$correlativo,$hoy,$hora,$id_orden,$v->id_optica,$v->id_sucursal,$id_usuario,$corr);
                 $this->registraAccionCobros($codigo,"Abono - Recibo: ".$corr,"Abono parcial",$id_usuario);
+                array_push($abonos_parc, $codigo);
             }
             
         }      
          
-       $msjs = ['completos'=>"Se han realizado <span style='color: #1b837d'><b>$completos </b></span>abonos completos", 'parciales'=>"Se han realizado <span style='color: #0e2227'><b>$parciales </b></span>abonos parciales",'correlativo'=>$corr];
+       $msjs = ['completos'=>"Se han realizado <span style='color: #1b837d'><b>$completos </b></span>abonos completos", 'parciales'=>"Se han realizado <span style='color: #0e2227'><b>$parciales </b></span>abonos parciales",'correlativo'=>$corr,"abonos_completos"=>$abonos_comp,"abonos_parciales"=>$abonos_parc];
        echo json_encode($msjs);
 
        //echo json_encode()
@@ -156,6 +159,17 @@ class Cobros extends conectar{
         $sql = "select r.id_recibo, r.n_recibo,r.id_optica,o.nombre,r.monto,r.fecha,r.hora,r.forma_pago,r.num_transaccion,r.banco,u.usuario,u.codigo_emp from optica as o INNER join recibos as r on o.id_optica=r.id_optica INNER join usuarios as u on r.id_usuario=u.id_usuario where r.id_optica = ?;";
         $sql= $conectar->prepare($sql);
         $sql->bindValue(1,(int)$id_optica);
+        $sql->execute();
+        return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDetalleRecibo($n_recibo,$id_optica){
+        $conectar=parent::conexion();
+    	parent::set_names();
+        $sql = "SELECT a.id_abono,a.correlativo_recibo,a.fecha,a.hora,s.direccion,o.paciente,o.codigo,a.n_doc,a.monto_orden,a.abonos_ant,a.saldo from abonos as a INNER JOIN orden as o on a.id_orden=o.id_orden inner join sucursal_optica as s on s.id_sucursal=a.id_sucursal where a.correlativo_recibo=? and a.id_optica=?;";
+        $sql= $conectar->prepare($sql);
+        $sql->bindValue(1,$n_recibo);
+        $sql->bindValue(2,$id_optica);
         $sql->execute();
         return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }

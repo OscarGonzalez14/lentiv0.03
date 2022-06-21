@@ -11,14 +11,22 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        Modal body..
+      <table width="100%" class="table-hover table-bordered" id="datatable_det_recibos" data-order='[[ 0, "desc" ]]' style="margin-top: 3px">        
+        <thead class="style_th bg-primary" style="color: white">
+          <th>ID abono</th>
+          <th># Orden</th>
+          <th># Rec.</th>
+          <th>Sucursal</th>
+          <th>Paciente</th>
+          <th>Doc. fact.</th>
+          <th>Monto orden</th>
+          <th>Abono</th>
+          <th>Fecha Abono</th>
+          <th>Saldo</th>   
+          </thead>
+        <tbody class="style_th"></tbody>
+      </table>
       </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-
     </div>
   </div>
 </div>

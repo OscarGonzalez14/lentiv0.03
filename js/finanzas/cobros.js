@@ -63,7 +63,7 @@ function dtTemplateCobros(table,route,...Args){
       "bDestroy": true,
       "responsive": true,
       "bInfo":true,
-      "iDisplayLength": 100,//Por cada 10 registros hace una paginación
+      "iDisplayLength": 2000,//Por cada 10 registros hace una paginación
         "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
         "language": { 
         "sProcessing":     "Procesando...",       
@@ -218,8 +218,19 @@ if(monto > total_saldos){
     })
     ///Actualizar Datatables!!
     $("#modal-abonos").modal('hide');
-    $("#datatable_listar_cobros").DataTable().ajax.reload(); 
+    //$("#datatable_listar_cobros").DataTable().ajax.reload(); 
+    const abonos_comp = data.abonos_completos;
+    console.log(abonos_comp)
+    for(var i = 0; i < abonos_comp.length; i++){
+      let id_orden = abonos_comp[i];
+      document.getElementById(id_orden).style.textDecoration = "line-through green";
+    }
 
+    const abonos_parc = data.abonos_parciales;
+    for(var j = 0; j < abonos_parc.length; j++){
+      let id_ordenp = abonos_parc[j];
+      document.getElementById(id_ordenp).style.textDecoration = "line-through orange";
+    }
   }
   });
 }
@@ -233,6 +244,7 @@ function historialAbonos(){
 
 function verDetRecibo(id_optica,recibo,nombre){
   $("#detalle-recibo").modal();
-  document.getElementById("title-cobros-recibo").innerHTML= `Recibo: ${recibo}      *      Optica: ${nombre}`;
+  document.getElementById("title-cobros-recibo").innerHTML= `Recibo: ${recibo}     *     Optica: ${nombre}`;
+  dtTemplateCobros("datatable_det_recibos","detalle_recibos",recibo,id_optica)
 }
 initCobros();
