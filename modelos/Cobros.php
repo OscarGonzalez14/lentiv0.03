@@ -124,7 +124,7 @@ class Cobros extends conectar{
                 $monto_act = $monto_act - $monto;
                 $completos++;               
                 $this->registrarAbono($codigo,$monto,$abonos,"0",$corr,$correlativo,$hoy,$hora,$id_orden,$v->id_optica,$v->id_sucursal,$id_usuario,$corr);
-                $this->registraAccionCobros($codigo,"Abono","Cancelacion",1);
+                $this->registraAccionCobros($codigo,"Abono - Recibo: ".$corr,"Cancelacion",1);
             }elseif($monto_act < $monto and $monto_act > 0){
                 $saldo = ($monto) - ($monto_act);
                 $abono = $monto_act;
@@ -137,8 +137,8 @@ class Cobros extends conectar{
                 $sql_u->execute();
                 $monto_act = $monto_act - $abono;
                 $parciales++;               
-                $this->registrarAbono($codigo,$monto,$abonos,"0",$corr,$correlativo,$hoy,$hora,$id_orden,$v->id_optica,$v->id_sucursal,$id_usuario,$corr);
-                $this->registraAccionCobros($codigo,"Abono","Abono parcial",$id_usuario);
+                $this->registrarAbono($codigo,$monto,$abonos,$saldo,$corr,$correlativo,$hoy,$hora,$id_orden,$v->id_optica,$v->id_sucursal,$id_usuario,$corr);
+                $this->registraAccionCobros($codigo,"Abono - Recibo: ".$corr,"Abono parcial",$id_usuario);
             }
             
         }      
@@ -147,6 +147,17 @@ class Cobros extends conectar{
        echo json_encode($msjs);
 
        //echo json_encode()
+    }
+
+    public function getResumenCobro($id_optica){
+        $conectar=parent::conexion();
+    	parent::set_names();   
+        
+        $sql = "select r.id_recibo, r.n_recibo,r.id_optica,o.nombre,r.monto,r.fecha,r.hora,r.forma_pago,r.num_transaccion,r.banco,u.usuario,u.codigo_emp from optica as o INNER join recibos as r on o.id_optica=r.id_optica INNER join usuarios as u on r.id_usuario=u.id_usuario where r.id_optica = ?;";
+        $sql= $conectar->prepare($sql);
+        $sql->bindValue(1,(int)$id_optica);
+        $sql->execute();
+        return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
     
 }

@@ -50,9 +50,9 @@ switch ($_GET["op"]) {
          foreach ($data as $row) {
             $sub_array = array();
             $sub_array[] = $row["nombre"];
-            $sub_array[] = $row["limite_credito"];
-            $sub_array[] = $row["acumulado"];
-            $sub_array[] = $row["min_fac"];  
+            $sub_array[] = "$".number_format($row["limite_credito"]);
+            $sub_array[] = "$".number_format($row["acumulado"],2,".",",");
+            $sub_array[] = date("d-m-Y", strtotime($row["min_fac"]));  
             $sub_array[] = $row["transc"]." dias";
             $sub_array[] = '<button type="button"  class="btn btn-sm bg-light" onClick="verDetCobrosOptica('.$row['id_optica'].',\''.$row['nombre'].'\')"><i class="fa fa-eye" aria-hidden="true" style="color:blue"></i></button>';
             $datos[] = $sub_array;
@@ -111,6 +111,35 @@ switch ($_GET["op"]) {
         }else{
          echo json_encode("Error");
         }
+         break;
+
+      case "resumen_cobros":
+         $id_optica = implode("",$_POST["Args"]);
+         $cobros = $cobros->getResumenCobro($id_optica);
+         foreach ($cobros as $row) {
+            $sub_array = array();
+             $sub_array[] = $row["id_recibo"];
+             $sub_array[] = $row["n_recibo"];
+             $sub_array[] = $row["nombre"];
+             $sub_array[] = "$".number_format($row["monto"],2,".",",");  
+             $sub_array[] =  date("d-m-Y", strtotime($row["fecha"]))." ".$row["hora"];
+             $sub_array[] = $row["codigo_emp"]."-".$row["usuario"];
+             $sub_array[] = $row["forma_pago"];
+             $sub_array[] = $row["num_transaccion"];
+             $sub_array[] = $row["banco"];
+             $sub_array[] = '<button type="button"  class="btn btn-sm bg-light"><i class="fa fa-eye" aria-hidden="true" style="color:blue" onClick="verDetRecibo('.$row['id_optica'].',\''.$row['n_recibo'].'\',\''.$row['nombre'].'\')"></i></button>';
+             $datos[] = $sub_array;             
+             
+          }
+     
+         $results = array(
+            "sEcho"=>1, //Información para el datatables
+            "iTotalRecords"=>count($datos), //enviamos el total registros al datatable
+            "iTotalDisplayRecords"=>count($datos), //enviamos el total registros a visualizar
+            "aaData"=>$datos);
+ 
+            echo json_encode($results); 
+            break;
          break;
 
 }

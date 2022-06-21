@@ -71,7 +71,11 @@ body{
 
         <li class="nav-item">
           <a class="nav-link" style="background:  #F5FCFF;cursor:pointer;"><i class="fas fa-hand-holding-usd" style="color: black" onClick="getCuentasMensuales()"></i> Contado</a>
-        </li>        
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" style="background:  #F5FCFF;cursor:pointer;"><i class="fas fa-book" style="color: black"></i> Historial cobros</a>
+        </li>
       
     </div>
 
@@ -93,7 +97,11 @@ body{
     <!-- /.Modal FILTRAR CREDITOS -->
     
     <section>
-    <?php require_once("../modales/modal_detalle_cobros.php");?>
+    <?php 
+      require_once("../modales/modal_detalle_cobros.php");
+      require_once("../modales/cobros/resumen_abonos.php");
+      require_once("../modales/cobros/detalle_recibo.php");
+    ?>
   <!--MODAL ABONO--->
   
   <div class="modal" id="modal-abonos">
@@ -112,35 +120,35 @@ body{
       </div>
 
       <div class="eight"style="align-items: center">
-              <strong><h1 style="color:#034f84">FORMA DE PAGO</h1></strong>
-              <div class="row">
-                  <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input check_clear" type="radio" id="contado_cobro" value="Contado" name="forma-cobro">
-                      <label class="form-check-label" for="lentevs" id="">Contado</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input check_clear" id="transf"  type="radio" value="Transferencia" name="forma-cobro">
-                      <label class="form-check-label" for="transf" id="">Transf.</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input check_clear"  id="chq" type="radio" value="Cheque" name="forma-cobro" >
-                      <label class="form-check-label" for="chq" id="">Cheque</label>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input  check_clear"  id="tarjetac" type="radio" value="Tarjeta Credito" name="forma-cobro">
-                      <label class="form-check-label" for="tarjetac" id="">Tarjeta c.</label>
-                    </div>
-                  </div>
+          <strong><h1 style="color:#034f84">FORMA DE PAGO</h1></strong>
+          <div class="row">
+              <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input check_clear" type="radio" id="contado_cobro" value="Contado" name="forma-cobro">
+                  <label class="form-check-label" for="lentevs" id="">Contado</label>
+                </div>
               </div>
-            </div>
+              <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input check_clear" id="transf"  type="radio" value="Transferencia" name="forma-cobro">
+                  <label class="form-check-label" for="transf" id="">Transf.</label>
+                </div>
+              </div>
+              <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input check_clear"  id="chq" type="radio" value="Cheque" name="forma-cobro" >
+                  <label class="form-check-label" for="chq" id="">Cheque</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3" style="display:flex;justify-content: center;margin-top:0px;">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input  check_clear"  id="tarjetac" type="radio" value="Tarjeta Credito" name="forma-cobro">
+                  <label class="form-check-label" for="tarjetac" id="">Tarjeta c.</label>
+                </div>
+              </div>
+          </div>
+      </div>
       
     <div class="form-row datos-bhanco" id="datos-banco">
 
@@ -152,7 +160,7 @@ body{
       <div class="form-group col-sm-6 select2-purple">
         <label for="banco-cobro">Banco</label>
         <select class="form-control select2" id="banco-cobro" multiple="multiple" data-placeholder="Seleccionar banco" data-dropdown-css-class="select2-purple" >
-        <option value="0">Selecccionar banco ...</option>
+       <option value="0">Selecccionar banco ...</option>
         <option value="Agricola">Agricola</option>
         <option value="Cuscatlan">Cuscatlan</option>
         <option value="Davivienda">Davivienda</option>

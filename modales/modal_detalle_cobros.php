@@ -1,5 +1,5 @@
 <!-- The Modal -->
-<div class="modal" id="modal-det-cobros">
+<div class="modal" id="modal-det-cobros" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog" style="max-width: 95%;">
     <div class="modal-content">
 
@@ -22,11 +22,11 @@
         </div>     
         
         <div class=" form-group col-sm-2">
-          <button type="button" class="btn btn-block btn-outline-light  btn-flat" data-toggle="modal" data-target="#filtrar-creditos" style="color:black" onClick="getValuesCcf()"><i class="fas fa-book" style="color:black"></i>Hist. abonos</button>
+          <button type="button" class="btn btn-block btn-outline-light  btn-flat" data-toggle="modal" data-target="#filtrar-creditos" style="color:black" onClick="historialAbonos()"><i class="fas fa-book" style="color:black"></i>Hist. abonos</button>
         </div>   
                
       </div>
-      <input type="text" id='id-optica'>
+      <input type="hidden" id='id-optica'>
       <table width="100%" class="table-hover table-bordered" id="datatable_listar_cobros" data-order='[[ 3, "desc" ]]' style="margin-top: 3px">        
                <thead class="style_th bg-dark" style="color: white">
                 <!-- <th><label><input type="checkbox" id="select-all-cobrar-chk" class="form-check-label" onClick="selectOrdenesCobrar()"> Sel.</label></th> -->

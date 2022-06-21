@@ -186,7 +186,13 @@ let n_trans = document.getElementById("doc-abono").value;
 let banco_cobro = document.getElementById("banco-cobro").value;
 let id_optica = document.getElementById("id-optica").value;
 
-console.log(forma_cobro)
+if(monto == ""){ Toast.fire({icon: 'error',title: 'Especificar monto'}); return false;}
+
+if(forma_cobro=="" || forma_cobro==null || forma_cobro==undefined){ Toast.fire({icon: 'error',title: 'Forma de cobro es un campo obligatorio.'}); return false;}
+
+if((forma_cobro=="Transferencia" || forma_cobro=="Cheque" || forma_cobro=="Tarjeta Credito") && (banco_cobro == "" || n_trans == "")){
+  Toast.fire({icon: 'error',title: 'Numero de transacción o Banco no sido seleccionado.'}); return false;
+}
 
 if(monto > total_saldos){
   Toast.fire({icon: 'error',title: 'El abono excede el total de creditos.'}); 
@@ -218,5 +224,15 @@ if(monto > total_saldos){
   });
 }
 
+function historialAbonos(){
+  let id_optica = document.getElementById("id-optica").value;
+  $("#resumen-abonos").modal();
+  dtTemplateCobros("datatable_resumen_cobros","resumen_cobros",id_optica)
+  
+}
 
+function verDetRecibo(id_optica,recibo,nombre){
+  $("#detalle-recibo").modal();
+  document.getElementById("title-cobros-recibo").innerHTML= `Recibo: ${recibo}      *      Optica: ${nombre}`;
+}
 initCobros();
