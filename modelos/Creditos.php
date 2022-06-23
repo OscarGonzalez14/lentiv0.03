@@ -11,7 +11,8 @@ class Creditos extends conectar {//inicio de la clase
       	$sql= "select n_correlativo from creditos_fiscales order by id_ccf DESC limit 1;";
       	$sql=$conectar->prepare($sql);
       	$sql->execute();
-      	return $sql->fetchColumn();
+      	//return $sql->fetchColumn();
+		return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public function pagoMeMensual($fecha_registro,$hoy){
@@ -125,8 +126,18 @@ class Creditos extends conectar {//inicio de la clase
 		$sql->execute();
 
 		$correlativo_ccf = $this->getCorrelativoCCF();
-		$corr = substr($correlativo_ccf,4,20);
-        $correlativo = "ccf-".((int)$corr)+1;
+		if(is_array($correlativo_ccf)==true and count($correlativo_ccf)>0){
+			foreach($correlativo_ccf as $v){
+				$n_credito = $v["n_correlativo"];
+			}
+			$corr = substr($n_credito,4,20);
+			$correlativo = "ccf-".((int)$corr + (int)1);
+
+		}else{
+			$correlativo = "ccf-1";
+		}
+		 
+        
         $estado_ccf ="Sin cancelar";
 		$sql2 = "insert into creditos_fiscales values(null,?,?,?,?,?,?,?,?);";
 		$sql2 = $conectar->prepare($sql2);

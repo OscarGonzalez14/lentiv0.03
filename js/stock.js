@@ -341,7 +341,7 @@ function registroMultiple(){
 /*-------------- SHOW TABLAS BASES----------*/
 function get_dataTableBase(id_div,marca){
  console.log(id_div+"*"+marca)
- $.ajax({
+  $.ajax({
       url:"../ajax/stock.php?op=get_tableBaseVs",
       method:"POST",
       data : {marca:marca},

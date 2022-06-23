@@ -61,7 +61,7 @@ foreach ($data_despacho as $key) {
 
 <tr>
 <td width="25%" style="width: 10%;margin:0px">
-	<img src='../dist/img/lenti_logo.png' width="90" height="70"/></td>
+	<img src='lenti_logo.jpg' width="90" height="70"/></td>
 </td>
 	
 <td width="50%" style="width: 75%;margin:0px">
