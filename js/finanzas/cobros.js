@@ -57,14 +57,14 @@ function dtTemplateCobros(table,route,...Args){
       },      
       /*success: function(result) {
         console.log(result.aaData)
-    },  */ 
+      },*/ 
     },
   
       "bDestroy": true,
       "responsive": true,
       "bInfo":true,
       "iDisplayLength": 2000,//Por cada 10 registros hace una paginación
-        "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+        "order": [[ 0, "asc" ]],//Ordenar (columna,orden)
         "language": { 
         "sProcessing":     "Procesando...",       
         "sLengthMenu":     "Mostrar _MENU_ registros",       

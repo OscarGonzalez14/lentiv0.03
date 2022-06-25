@@ -56,7 +56,7 @@ class Cobros extends conectar{
         $sql2->bindValue(12, $id_orden);
         $sql2->execute();
 
-        $sql = "insert into detalle_recibo values(null,?,?,?,?,?,?);";
+        /*$sql = "insert into detalle_recibo values(null,?,?,?,?,?,?);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $n_doc);
         $sql->bindValue(2, $id_optica);
@@ -64,7 +64,7 @@ class Cobros extends conectar{
         $sql->bindValue(4, $id_orden);
         $sql->bindValue(5, $monto);
         $sql->bindValue(6, $corr_recibo);
-        $sql->execute();
+        $sql->execute();*/
     }
     
     public function validaExisteCorr($corr){
@@ -81,7 +81,7 @@ class Cobros extends conectar{
         $sql= "select n_recibo from recibos order by id_recibo DESC limit 1;";
         $sql=$conectar->prepare($sql);
         $sql->execute();
-        return $sql->fetchColumn();
+        return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function registrarCobro($arrayccf,$montoAct,$id_usuario,$corr,$forma_cobro,$n_trans,$banco_cobro,$id_optica){

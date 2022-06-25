@@ -76,7 +76,7 @@ switch ($_GET["op"]) {
          foreach ($data as $row) {
             $saldo_acumulado = $saldo_acumulado + $row["saldo"];
              $sub_array = array();
-             //$sub_array[] = '<div style="text-align:center"><input type="checkbox" class="form-check-input ordenes_enviar_inabve" style="text-align: center" value="'.$row["codigo"].','.$row["monto"].'" id="n_item'.$cont.'"><span style="color:white">.</span></div>';    
+             $sub_array[] = $row["id_credito"];
              $sub_array[] = "<span id='ccf".$cont."' class='correlativos-ccf' data-spans=".$row["n_correlativo"]." data-montoccf=".$row["saldo"]." data-codigo=".$row["codigo"]." data-abonos=".$row["abono"]." data-idorden=".$row["id_orden"]." data-idoptica=".$row["id_optica"]." data-idsucursal=".$row["id_sucursal"].">".$row["n_correlativo"]."</span>";
              $sub_array[] =  date("d-m-Y", strtotime($row["fecha_fact"]))." ".$row["hora_fact"];
              $sub_array[] =  date("d-m-Y", strtotime($row["fecha_pago"]));   
@@ -102,16 +102,27 @@ switch ($_GET["op"]) {
 
       case 'registrar_cobros':
         $correlativo = $cobros->getCorrelativoRecibo();
-        $corr = substr($correlativo,3,20);
-        $corr= "RL-".(int) $corr+1;
+    
+        if(is_array($correlativo)==true and count($correlativo)>0){
+            foreach($correlativo as $c){
+               $num_corr = $c["n_recibo"];               
+            }
+            $corrtv = substr($num_corr,3,20);
+            $corr = "RL-".((int)$corrtv +(int)1);
+        }else{
+              $corr = "RL-1";
+        }
         
-        $validaCorrelativo = $cobros->validaExisteCorr($corr);
+       
+        
+      $validaCorrelativo = $cobros->validaExisteCorr($corr);
         if (is_array($validaCorrelativo)==true and count($validaCorrelativo)==0 ){
         $cobros->registrarCobro($_POST["arrayccf"],$_POST["monto"],$_POST["id_usuario"],$corr,$_POST["forma_cobro"],$_POST["n_trans"],$_POST["banco_cobro"],$_POST["id_optica"]);
         }else{
          echo json_encode("Error");
         }
-         break;
+         
+      break;
 
       case "resumen_cobros":
          $id_optica = implode("",$_POST["Args"]);
@@ -127,7 +138,7 @@ switch ($_GET["op"]) {
              $sub_array[] = $row["forma_pago"];
              $sub_array[] = $row["num_transaccion"];
              $sub_array[] = $row["banco"];
-             $sub_array[] = '<button type="button"  class="btn btn-sm bg-light"><i class="fa fa-eye" aria-hidden="true" style="color:blue" onClick="verDetRecibo('.$row['id_optica'].',\''.$row['n_recibo'].'\',\''.$row['nombre'].'\')"></i></button>';
+             $sub_array[] = '<button type="button"  class="btn btn-sm bg-light" onClick="verDetRecibo('.$row['id_optica'].',\''.$row['n_recibo'].'\',\''.$row['nombre'].'\')"><i class="fa fa-eye" aria-hidden="true" style="color:blue"></i></button>';
              $datos[] = $sub_array;             
              
           }

@@ -188,7 +188,7 @@ class Creditos extends conectar {//inicio de la clase
         $conectar=parent::conexion();
     	parent::set_names();
 
-        $sql = "SELECT c.id_credito,cf.n_correlativo,c.monto,o.paciente,o.codigo,o.id_optica,o.id_sucursal,op.nombre,s.direccion,c.estado,c.fecha_pago,c.saldo,cf.hora,cf.fecha,c.fecha_fact,c.hora_fact,TIMESTAMPDIFF(DAY,c.`fecha_fact`,NOW()) as dias,c.abono,c.id_orden FROM creditos as c INNER join creditos_fiscales as cf on c.codigo_orden=cf.codigo_orden inner join orden as o on cf.codigo_orden=o.codigo inner join optica as op on op.id_optica=c.id_optica INNER JOIN sucursal_optica as s on c.id_sucursal=s.id_sucursal where  c.id_optica=? and c.saldo > 0 order by dias DESC;";
+        $sql = "SELECT c.id_credito,cf.n_correlativo,c.monto,o.paciente,o.codigo,o.id_optica,o.id_sucursal,op.nombre,s.direccion,c.estado,c.fecha_pago,c.saldo,cf.hora,cf.fecha,c.fecha_fact,c.hora_fact,TIMESTAMPDIFF(DAY,c.`fecha_fact`,NOW()) as dias,c.abono,c.id_orden FROM creditos as c INNER join creditos_fiscales as cf on c.codigo_orden=cf.codigo_orden inner join orden as o on cf.codigo_orden=o.codigo inner join optica as op on op.id_optica=c.id_optica INNER JOIN sucursal_optica as s on c.id_sucursal=s.id_sucursal where  c.id_optica=? and c.saldo > 0 order by c.id_credito ASC;";
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1, $id_optica);
 		$sql->execute();
