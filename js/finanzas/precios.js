@@ -118,19 +118,12 @@ function selectDisenoVs(id){
   let val_diseno = document.getElementById(id).value;
   let items_tratamientos = document.getElementsByClassName('items_tratamientos');
   console.log(val_diseno)
-  if(val_diseno != "TERMINADO AR BLUE UV"){
-    document.getElementById("arblueuv").disabled = true;
-    document.getElementById("arblueuv").checked = false;
-    document.getElementById("arblack").disabled = false;
-    document.getElementById("arblack").checked = false;
-    document.getElementById("cat_orden").value = "Proceso";
-  }else if(val_diseno == "TERMINADO AR BLUE UV"){
-    document.getElementById("arblueuv").disabled = false;
-    document.getElementById("arblueuv").checked = true;
+  if(val_diseno == "TERMINADO AR"){
     document.getElementById("arblack").disabled = true;
     document.getElementById("blanco").disabled = true;
     document.getElementById("arblack").checked = false;
     document.getElementById("fotochroma").checked = false;
+    ocument.getElementById("fotochroma").disabled = true;
     document.getElementById("transition").checked = false;
     validaRxValores();
   }if(val_diseno == "VS AURORA"){
@@ -278,7 +271,13 @@ function getTrats(id){
     operacionesMultifocal();
   }else if(marcaVs=='BIFOCAL 1.56' || marcaVs=='Invisible Blue UV'){
    operacionesBifocal();
+  }else if(marcaVs=="TERMINADO AR"){
+    operacionesTermAr();
   }
+}
+
+function operacionesTermAr(){
+  console.log('TermAr');
 }
 
 function operacionesVsAurora(){

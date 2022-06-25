@@ -191,18 +191,19 @@
 
          <!--################## TRATAMIENTOS ######################-->
           <div class="row tratamientos" id="tratamientos_section">
-            <div class="col-sm-2">
+            <div class="col-sm-4">
             <div class="eight">
-              <h1>TERMINADO</h1>
+              <h1>TERMINADO AR</h1>
                   <div class="d-flex justify-content-center">
+                    
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="blanco" value="Blanco" name='chk_tratamientos'  data-element="blanco" onclick="getSelectItemThat(this.id)">
-                      <label class="form-check-label" for="blanco" id="lbl_blanco">Blue UV AR</label>
+                      <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="Blue Uv" value="Blue Uv" name='chk_tratamientos'  data-element="Blue Uv" onclick="getSelectItemThat(this.id)">
+                      <label class="form-check-label" for="Blue Uv" id="lbl_blanco">Blue UV</label>
                     </div>
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="blanco" value="Blanco" name='chk_tratamientos'  data-element="blanco" onclick="getSelectItemThat(this.id)">
-                      <label class="form-check-label" for="blanco" id="lbl_blanco">UV AR</label>
+                      <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="Uv" value="Blanco" name='chk_tratamientos'  data-element="UV" onclick="getSelectItemThat(this.id)">
+                      <label class="form-check-label" for="blanco" id="lbl_blanco">UV</label>
                     </div>
                   </div>
 
@@ -232,11 +233,10 @@
               </div>
             </div>
 
-            <div class="col-sm-5 antirrflejantes">
+            <div class="col-sm-3 antirrflejantes">
                 <div class="eight" style="align-items: center">
                   <h1>ANTIRREFLEJANTE</h1>
                   <div class="d-flex justify-content-center">
-
                     <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-dark">
                       <input type="checkbox" class="custom-control-input  checks check_clear" id="arblack" value="AR BLACK DIAMOND" name='chk_antiR' onclick='calculaPrecioAr()'; style="background-color: gray !important; color: gray imop !important">
                       <label class="custom-control-label" for="arblack">AR BLACK DIAMOND</label>
