@@ -195,14 +195,14 @@
             <div class="eight">
               <h1>TERMINADO AR</h1>
                   <div class="d-flex justify-content-center">
-                    
+
                     <div class="form-check form-check-inline">
                       <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="Blue Uv" value="Blue Uv" name='chk_tratamientos'  data-element="Blue Uv" onclick="getSelectItemThat(this.id)">
                       <label class="form-check-label" for="Blue Uv" id="lbl_blanco">Blue UV</label>
                     </div>
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="Uv" value="Blanco" name='chk_tratamientos'  data-element="UV" onclick="getSelectItemThat(this.id)">
+                      <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="Uv" value="Uv" name='chk_tratamientos'  data-element="UV" onclick="getSelectItemThat(this.id)">
                       <label class="form-check-label" for="blanco" id="lbl_blanco">UV</label>
                     </div>
                   </div>
@@ -225,7 +225,7 @@
                       </div>
 
                       <div class="form-check form-check-inline">
-                          <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="transition" value="TRANSITION" name='chk_tratamientos' data-element="transition" onclick="getSelectItemThat(this.id)">
+                          <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="blanco" value="BLANCO" name='chk_tratamientos' data-element="transitBLANCOion" onclick="getSelectItemThat(this.id)">
                           <label class="form-check-label" for="transition" id="lbl_transitionphoto">BLANCO</label>
                       </div>
 
@@ -321,10 +321,10 @@
             
          </div>
          <!--<span ></span> -->
-         <input type="text" id="p_venta_trat" readonly="" value="0" class="clear_orden_i">
-         <input type="text" name="" id="p_venta_final" class="clear_orden_i">
-         <input type="text" name="" id="cat_orden" class="clear_orden_i">
-         <input type="text" id="codigoOrden" name="codigoOrden">
+         <input type="hidden" id="p_venta_trat" readonly="" value="0" class="clear_orden_i">
+         <input type="hidden" name="" id="p_venta_final" class="clear_orden_i">
+         <input type="hidden" name="" id="cat_orden" class="clear_orden_i">
+         <input type="hidden" id="codigoOrden" name="codigoOrden">
         </form>
           </div><!--/END MODAL BODY-->
             <div class="modal-footer justify-content-between">            

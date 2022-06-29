@@ -119,12 +119,15 @@ function selectDisenoVs(id){
   let items_tratamientos = document.getElementsByClassName('items_tratamientos');
   console.log(val_diseno)
   if(val_diseno == "TERMINADO AR"){
-    document.getElementById("arblack").disabled = true;
-    document.getElementById("blanco").disabled = true;
+    console.log("Ok")
     document.getElementById("arblack").checked = false;
+    document.getElementById("arblack").disabled = true;
     document.getElementById("fotochroma").checked = false;
-    ocument.getElementById("fotochroma").disabled = true;
+    document.getElementById("fotochroma").disabled = true;
     document.getElementById("transition").checked = false;
+    document.getElementById("transition").disabled = true;
+    document.getElementById("blanco").checked = false;
+    document.getElementById("blanco").disabled = true;
     validaRxValores();
   }if(val_diseno == "VS AURORA"){
     document.getElementById("blanco").checked = false; 
@@ -277,7 +280,15 @@ function getTrats(id){
 }
 
 function operacionesTermAr(){
-  console.log('TermAr');
+  let tratamiento = $("input[type='checkbox'][name='chk_tratamientos']:checked").val();
+  console.log(tratamiento)
+  if(tratamiento=="Blue Uv"){
+    document.getElementById("p_venta_trat").value = 16.95;
+    setPrecioVenta();
+  }else if(tratamiento=="Uv"){
+    document.getElementById("p_venta_trat").value = 14.00;
+    setPrecioVenta();
+  }
 }
 
 function operacionesVsAurora(){
