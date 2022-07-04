@@ -153,7 +153,8 @@ class Ordenes extends Conectar{
     $sql5->execute();
 
     if ($sql->rowCount()>0) {
-      echo $codigo;
+      $msjs = ["codigo"=>$codigo,"fecha"=>$hoy];
+      echo json_encode($msjs);
     }else{
       echo "Error";
     }

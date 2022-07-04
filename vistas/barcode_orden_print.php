@@ -41,7 +41,7 @@ foreach ($optica_act as $key) {
             <div id="qrbox">
               <div style="margin: 0px;">
                 <span style="font-size: 17px"><b>LENTI</b></span>&nbsp;&nbsp;<span><?php echo $codigo;?></span></span>&nbsp;&nbsp;<span><?php echo substr($mes_act,0,3)." ".substr($codigo,4,12);?></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 15px;text-transform: uppercase;"><b><?php echo substr($dia, 0,3)?></b></span><br>
-                <span style="font-size:11px;text-transform: uppercase;"><b><?php echo $paciente;?></span><br>
+                <span style="font-size:12px;text-transform: uppercase;"><b><?php echo $paciente;?></span><br>
                 <span style="font-size: 15px"><b><?php echo $optica;?></span>
                 </div>
                 <div><?php echo $code;?></div>
@@ -67,7 +67,7 @@ foreach ($optica_act as $key) {
 
     </div>
 <script>
-    window.print();
+    //window.print();
     //window.close();
   </script> 
 </body>

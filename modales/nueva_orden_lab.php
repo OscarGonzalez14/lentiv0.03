@@ -1,4 +1,4 @@
- <div class="modal fade" id="nueva_orden_lab" style="text-transform: uppercase;">
+ <div class="modal fade" id="nueva_orden_lab" style="text-transform: uppercase;" data-backdrop="static" data-keyboard="false" >
     <div class="modal-dialog modal-xl modal-dialog-scrollable" style="max-width: 85%">
       <div class="modal-content">
         <div class="modal-header bg-dark">

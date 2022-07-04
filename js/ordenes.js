@@ -205,21 +205,22 @@ function guardar_orden(){
     'od_dist_pupilar':od_dist_pupilar,'od_altura_pupilar':od_altura_pupilar,'od_altura_oblea':od_altura_oblea,'oi_dist_pupilar':oi_dist_pupilar,
     'oi_altura_pupilar':oi_altura_pupilar,'oi_altura_oblea':oi_altura_oblea,'tratamiento_orden':tratamiento_orden,'contenedor':contenedor,'marca_trat':marca_trat,'antirreflejante':antirreflejante,'categoria':categoria,'precio':precio},
     cache: false,
+    dataType : "json",  
     success:function(data){
-  
+      console.log(data)
       if (data != 'Error') {
       clearElementsForm();   
       $("#datatable_ordenes").DataTable().ajax.reload(); 
       event.preventDefault()
       Swal.fire({
-        title: 'Codigo: '+data,
+        title: 'Codigo: '+data.codigo,
         icon: 'info',
         html: '<u>'+paciente+'</u> ha sido registrad@ exitosamente',
         showCloseButton: true,
         showCancelButton: false,
         focusConfirm: true
       });
-
+      generate_barcode_print(data.codigo,paciente,id_sucursal,id_optica,data.fecha,usuario)
       }else{
       Swal.fire({
         position: 'top-center',
