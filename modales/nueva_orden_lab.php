@@ -197,12 +197,12 @@
                   <div class="d-flex justify-content-center">
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="Blue Uv" value="Blue Uv" name='chk_tratamientos'  data-element="Blue Uv" onclick="getSelectItemThat(this.id)">
+                      <input class="form-check-input items_tratamientos checks check_clear chk_terms" type="checkbox" id="BlueUv" value="Blue Uv" name='chk_tratamientos'  data-element="Blue Uv" onclick="getSelectItemThat(this.id)">
                       <label class="form-check-label" for="Blue Uv" id="lbl_blanco">Blue UV</label>
                     </div>
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="Uv" value="Uv" name='chk_tratamientos'  data-element="UV" onclick="getSelectItemThat(this.id)">
+                      <input class="form-check-input items_tratamientos checks check_clear chk_terms" type="checkbox" id="Uv" value="Uv" name='chk_tratamientos'  data-element="UV" onclick="getSelectItemThat(this.id)">
                       <label class="form-check-label" for="blanco" id="lbl_blanco">UV</label>
                     </div>
                   </div>
@@ -214,6 +214,7 @@
               <div class="eight">
                 <h1>DISEÑOS PROCESO</h1>
                     <div class="d-flex justify-content-center">
+
                       <div class="form-check form-check-inline">
                           <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="fotochroma" value="FOTOCHROMA" name='chk_tratamientos'  data-element="fotochroma" onclick="getSelectItemThat(this.id)">
                         <label class="form-check-label" for="fotochroma">FOTOCHROMA</label>
@@ -225,8 +226,8 @@
                       </div>
 
                       <div class="form-check form-check-inline">
-                          <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="blanco" value="BLANCO" name='chk_tratamientos' data-element="transitBLANCOion" onclick="getSelectItemThat(this.id)">
-                          <label class="form-check-label" for="transition" id="lbl_transitionphoto">BLANCO</label>
+                          <input class="form-check-input items_tratamientos checks check_clear" type="checkbox" id="blanco" value="Blanco" name='chk_tratamientos' onclick="getSelectItemThat(this.id)">
+                          <label class="form-check-label" for="transition" id="lbl_transitionphoto">BLANCO <span id="blueuvspan"></span></label>
                       </div>
 
                     </div>
@@ -238,7 +239,7 @@
                   <h1>ANTIRREFLEJANTE</h1>
                   <div class="d-flex justify-content-center">
                     <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-dark">
-                      <input type="checkbox" class="custom-control-input  checks check_clear" id="arblack" value="AR BLACK DIAMOND" name='chk_antiR' onclick='calculaPrecioAr()'; style="background-color: gray !important; color: gray imop !important">
+                      <input type="checkbox" class="custom-control-input  checks check_clear" id="arblack" value="AR BLACK DIAMOND" name='chk_antiR' onclick='calculaPrecioAr()'; style="background-color: gray !important; color: gray !important">
                       <label class="custom-control-label" for="arblack">AR BLACK DIAMOND</label>
                     </div>
                   </div>

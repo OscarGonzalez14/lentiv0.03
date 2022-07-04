@@ -17,6 +17,7 @@ function verTipoLente(id){
   let chk_bf = document.getElementsByClassName('input-bf');
   let chk_mf = document.getElementsByClassName('input-mf');   
   let val_check = document.getElementById(id).value;
+  let chk_terms = document.getElementsByClassName('chk_terms');
 
   if (val_check=="Visión Sencilla"){
     document.getElementById("disenos_vs").style.display = "block";
@@ -66,9 +67,7 @@ function verTipoLente(id){
       document.getElementById(id_check).disabled = false;
       document.getElementById(id_check).checked = false;
     }
-    document.getElementById("arblueuv").checked = false;
-    document.getElementById("arblueuv").disabled = true;
-
+    
     document.getElementById("transition").checked = false;
     document.getElementById("transition").disabled = true;
 
@@ -231,6 +230,7 @@ function operacionesArBlueUv(){
 function getSelectItemThat(id) {
     console.log(id);
     contador=0;
+    document.getElementById("blueuvspan").innerHTML="";
     let tratamientos = document.getElementsByClassName('items_tratamientos');
 
     for(i=0;i<tratamientos.length;i++){
@@ -272,7 +272,7 @@ function getTrats(id){
     operacionesVsAurora();
   }else if(marcaVs=='Alena' || marcaVs=='Aurora'  || marcaVs=='A CLEAR'  || marcaVs=='GEMINI'){
     operacionesMultifocal();
-  }else if(marcaVs=='BIFOCAL 1.56' || marcaVs=='Invisible Blue UV'){
+  }else if(marcaVs=='BIFOCAL 1.56' || marcaVs=='Invisible'){
    operacionesBifocal();
   }else if(marcaVs=="TERMINADO AR"){
     operacionesTermAr();
@@ -283,9 +283,13 @@ function operacionesTermAr(){
   let tratamiento = $("input[type='checkbox'][name='chk_tratamientos']:checked").val();
   console.log(tratamiento)
   if(tratamiento=="Blue Uv"){
+    document.getElementById("blueuvspan").innerHTML="";
+    document.getElementById("blueuvspan").innerHTML="";
     document.getElementById("p_venta_trat").value = 16.95;
     setPrecioVenta();
   }else if(tratamiento=="Uv"){
+    document.getElementById("blueuvspan").innerHTML="";
+    document.getElementById("blueuvspan").innerHTML="";
     document.getElementById("p_venta_trat").value = 14.00;
     setPrecioVenta();
   }
@@ -297,15 +301,18 @@ function operacionesVsAurora(){
 
   switch(tratamiento){
     case "Blanco":
+       document.getElementById("blueuvspan").innerHTML="";
         document.getElementById("p_venta_trat").value = 23;
         setPrecioVenta();
       break;    
     case "FOTOCHROMA":
+       document.getElementById("blueuvspan").innerHTML="";
         document.getElementById("p_venta_trat").value = 39.50;
         setPrecioVenta();
       break;
 
     case "TRANSITION":
+       document.getElementById("blueuvspan").innerHTML="";
         document.getElementById("p_venta_trat").value = 67.50;
         setPrecioVenta();
       break;  
@@ -320,23 +327,27 @@ function operacionesBifocal(){
   if (marcaVs=="BIFOCAL 1.56") {
       switch(tratamiento){
          case "Blanco":
+         document.getElementById("blueuvspan").innerHTML="";
         document.getElementById("p_venta_trat").value = 18;
         setPrecioVenta();
         break;
 
         case "FOTOCHROMA":
+         document.getElementById("blueuvspan").innerHTML="";
         document.getElementById("p_venta_trat").value = 42;
         setPrecioVenta();
         break;
       }
-  }else if(marcaVs=="Invisible Blue UV"){
+  }else if(marcaVs=="Invisible"){
     switch(tratamiento){
-         case "Blanco":
+        case "Blanco":
+        document.getElementById("blueuvspan").innerHTML="Blue Uv";
         document.getElementById("p_venta_trat").value = 42;
         setPrecioVenta();
         break;
 
         case "FOTOCHROMA":
+        document.getElementById("blueuvspan").innerHTML="";
         document.getElementById("p_venta_trat").value = 55;
         setPrecioVenta();
         break;
@@ -449,4 +460,10 @@ function calculaPrecioAr(){
   setPrecioVenta();
 }
 
+
+document.querySelectorAll(".input-bf").forEach(i => i.addEventListener("click", e => {
+ document.getElementById("blueuvspan").innerHTML="";
+ document.getElementById("fotochroma").checked = false;
+ document.getElementById("blanco").checked = false;
+}));
 init()
