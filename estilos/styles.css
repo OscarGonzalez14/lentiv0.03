@@ -172,7 +172,7 @@ border: 1px solid black;
 /* ESTILOS DETALLE ORDEN*/
 .dtOrden1{
   font-size: 12px;
-  text-align: left
+  text-align: left;
   border: 1px solid blue;
   padding: 2.5px;
   font-size: 12px;
@@ -192,7 +192,7 @@ border: 1px solid black;
 
 #table-det-lentes td{
   padding: 4px;
-  margin-left: 6px
+  margin-left: 6px;
   margin: 1em;
  }
 

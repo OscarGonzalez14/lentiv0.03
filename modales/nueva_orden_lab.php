@@ -322,8 +322,8 @@
             
          </div>
          <!--<span ></span> -->
-         <input type="hidden" id="p_venta_trat" readonly="" value="0" class="clear_orden_i">
-         <input type="hidden" name="" id="p_venta_final" class="clear_orden_i">
+         <input type="text" id="p_venta_trat" readonly="" value="0" class="clear_orden_i">
+         <input type="text" name="" id="p_venta_final" class="clear_orden_i">
          <input type="hidden" name="" id="cat_orden" class="clear_orden_i">
          <input type="hidden" id="codigoOrden" name="codigoOrden">
         </form>

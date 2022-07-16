@@ -67,8 +67,8 @@ foreach ($optica_act as $key) {
 
     </div>
 <script>
-    //window.print();
-    //window.close();
+    window.print();
+    window.close();
   </script> 
 </body>
 </html>

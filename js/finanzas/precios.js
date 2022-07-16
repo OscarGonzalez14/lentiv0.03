@@ -128,7 +128,7 @@ function selectDisenoVs(id){
     document.getElementById("blanco").checked = false;
     document.getElementById("blanco").disabled = true;
     validaRxValores();
-  }if(val_diseno == "VS AURORA"){
+  }if(val_diseno == "V/S AURORA"){
     document.getElementById("blanco").checked = false; 
     for(j=0;j<items_tratamientos.length;j++){
       let id_check = items_tratamientos[j].id;
@@ -166,14 +166,14 @@ function validaRxValores(){
     let esfera_oi = $("#oiesferasf_orden").val();
     let cilindro_oi = $("#oicolindrosf_orden").val();
 
-    if (((esfera_od >2 || esfera_od < -4) || (cilindro_od > 0 || cilindro_od < -3)) || ((esfera_oi >2 || esfera_oi < -4) || (cilindro_oi > 0 || cilindro_oi < -3)) ){
+    if (((esfera_od > 4 || esfera_od < -6) || (cilindro_od > 0 || cilindro_od < -4)) || ((esfera_oi >4 || esfera_oi < -6) || (cilindro_oi > 0 || cilindro_oi < -4))){
       document.getElementById("disvs1").checked = false;
       Swal.fire({
       title: '<strong>Rangos en Rx no disponible para diseño terminado</u></strong>',
       icon: 'warning',
       html:
         '<b>Solo se permiten los siguentes rangos</b>,<br>' +
-        '<span>Esf. +2.00 a -4.00 y Cil. 0.00 a -3.00</span>',
+        '<span>Esf. +4.00 a -4.00 y Cil. 0.00 a -3.00</span>',
         showCloseButton: true,
         showCancelButton: false,
         focusConfirm: false
@@ -268,7 +268,7 @@ function getTrats(id){
     return false;    
   } 
   console.log(marcaVs)
-  if (marcaVs=='VS AURORA') {
+  if (marcaVs=='V/S AURORA') {
     operacionesVsAurora();
   }else if(marcaVs=='Alena' || marcaVs=='Aurora'  || marcaVs=='A CLEAR'  || marcaVs=='GEMINI'){
     operacionesMultifocal();
@@ -298,9 +298,9 @@ function operacionesTermAr(){
 function operacionesVsAurora(){
   console.log("ok")
   let tratamiento = $("input[type='checkbox'][name='chk_tratamientos']:checked").val();
-
+  console.log(tratamiento)
   switch(tratamiento){
-    case "Blanco":
+    case "Blue Uv":
        document.getElementById("blueuvspan").innerHTML="";
         document.getElementById("p_venta_trat").value = 23;
         setPrecioVenta();
@@ -359,10 +359,10 @@ function operacionesBifocal(){
 function operacionesMultifocal(){
   let marcaVs = $("input[type='radio'][name='checksvs']:checked").val(); 
   let tratamiento = $("input[type='checkbox'][name='chk_tratamientos']:checked").val();
-  console.log()
+  console.log(tratamiento)
   if(marcaVs==='Alena'){
     switch(tratamiento){
-      case "Blanco":
+      case "Blue Uv":
         document.getElementById("p_venta_trat").value = 85.50;
         setPrecioVenta();
         break;
@@ -379,7 +379,7 @@ function operacionesMultifocal(){
     }
   }else if(marcaVs==='Aurora'){
     switch(tratamiento){
-      case "Blanco":
+      case "Blue Uv":
         document.getElementById("p_venta_trat").value = 65.75;
         setPrecioVenta();
         break;
@@ -396,7 +396,7 @@ function operacionesMultifocal(){
     }
   }else if(marcaVs==='A CLEAR'){
     switch(tratamiento){
-      case "Blanco":
+      case "Blue Uv":
         document.getElementById("p_venta_trat").value = 44.75;
         setPrecioVenta();
         break;
@@ -413,7 +413,7 @@ function operacionesMultifocal(){
     }
   }else if(marcaVs==='GEMINI'){
     switch(tratamiento){
-      case "Blanco":
+      case "Blue Uv":
         document.getElementById("p_venta_trat").value = 32.50;
         setPrecioVenta();
         break;
