@@ -67,13 +67,7 @@
                     <tr>
                        <td scope="col"><b>Óptica: </b><span id="optica_orden_suc" class="data_orden_desc"></span></td>
                        <td scope="col"><b>Sucursal: </b><span id="sucursal_optica_orden" class="data_orden_desc"></span></td>
-                       <td scope="col"><b>Tipo Lente:</b> <span id="tipo_lente_ord" class="data_orden_desc"></span></td>
-                      </tr> 
-
-                      <tr>
-                       <td scope="col"><b>Diseño: </b><span id="diseno_orden_suc" class="data_orden_desc"></span></td>
-                       <td scope="col"><b>Tratamiento: </b><span id="trat-orden" class="data_orden_desc"></span></td>
-                      </tr>                
+                    </tr>             
 
                   </table>
                   
@@ -175,14 +169,23 @@
 
             <div class="col-12 col-sm-12 col-md-5"><!--Inicio Item-->
               <div class="card bg-light" style="border: solid 2px #0275d8">
-                <div class="card-footer" style="border-bottom: solid 1px #5bc0de;">
-                  <div class="text-left">
-                      <a href="#" class="btn btn-sm btn-dark">
-                      <i class="fas fa-glasses"></i> Lentes
-                    </a>
-                  </div>
-                </div>
-                <div class="card-body pt-0">
+          
+                <table  class="table-bordered" style="font-family: Helvetica, Arial, sans-serif;width: 100%;text-align: center;font-size: 12px;text-transform:uppercase" width="100%">
+
+                <thead class="style_th bg-primary" style="color: white;padding:1px">
+                  <th>Lente</th>
+                  <th>Diseño</th>
+                  <th>Tratamiento</th> 
+                 </thead>
+                  <tr>
+                      <td scope="col"><span id="tipo_lente_ord" class="data_orden_desc"></span></td>
+                      <td scope="col"><span id="diseno_orden_suc" class="data_orden_desc"></span></td>
+                      <td scope="col"><span id="trat-orden" class="data_orden_desc"></span></td>
+                    </tr>             
+
+                  </table>
+
+                <div class="card-body pt-0" style="margin-top: 0px">
                   <!--SECCION OJO DERECHO--->
                   <h5 id="encabezado_od" style="font-family: Helvetica, Arial, sans-serif;width: 100%;text-align: center;font-size: 13px;padding: 1px;margin-top: 5px;color: white"></h5>
 
