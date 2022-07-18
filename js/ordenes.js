@@ -449,6 +449,8 @@ function get_dets_orden(){
         $("#obs_orden").val(data.observaciones);
         $("#id_optica_desc").val(data.id_optica);
         $("#id_sucursal_desc").val(data.id_sucursal);
+        $("#diseno_orden_suc").html(data.marca);
+        $("#trat-orden").html(data.trat_orden);
 
         document.getElementById("cod_orden_current").readOnly = true
         $('#cod_lente_inv').val("");

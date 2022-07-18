@@ -177,7 +177,7 @@ public function get_data_orden($codigo){
     $conectar = parent::conexion();
     parent::set_names();
 
-    $sql = "select op.nombre AS optica,op.id_optica,s.direccion as sucursal,s.telefono,s.id_sucursal,o.paciente,o.paciente,o.observaciones,o.tipo_lente,o.precio,o.trat_orden,o.codigo,s.fecha_registro,s.fecha_cobro,s.metodo_cobro,o.id_orden from orden as o inner join sucursal_optica as s on o.id_sucursal=s.id_sucursal INNER JOIN optica as op on op.id_optica= s.id_optica where o.codigo=?;";
+    $sql = "select op.nombre AS optica,op.id_optica,s.direccion as sucursal,s.telefono,s.id_sucursal,o.paciente,o.paciente,o.observaciones,o.tipo_lente,o.precio,o.trat_orden,o.codigo,s.fecha_registro,s.fecha_cobro,s.metodo_cobro,o.id_orden,o.marca from orden as o inner join sucursal_optica as s on o.id_sucursal=s.id_sucursal INNER JOIN optica as op on op.id_optica= s.id_optica where o.codigo=?;";
     $sql = $conectar->prepare($sql);
     $sql->bindValue(1, $codigo);
     $sql->execute();

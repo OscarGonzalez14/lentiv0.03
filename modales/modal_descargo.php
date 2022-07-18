@@ -68,7 +68,12 @@
                        <td scope="col"><b>Óptica: </b><span id="optica_orden_suc" class="data_orden_desc"></span></td>
                        <td scope="col"><b>Sucursal: </b><span id="sucursal_optica_orden" class="data_orden_desc"></span></td>
                        <td scope="col"><b>Tipo Lente:</b> <span id="tipo_lente_ord" class="data_orden_desc"></span></td>
-                      </tr>                 
+                      </tr> 
+
+                      <tr>
+                       <td scope="col"><b>Diseño: </b><span id="diseno_orden_suc" class="data_orden_desc"></span></td>
+                       <td scope="col"><b>Tratamiento: </b><span id="trat-orden" class="data_orden_desc"></span></td>
+                      </tr>                
 
                   </table>
                   
