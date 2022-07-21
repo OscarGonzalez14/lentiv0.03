@@ -142,7 +142,7 @@
               <a href="facturas.php" class="nav-link" style="color: white">
               <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
-                Facturación
+                Facturas
                 <i class="fas fa-angle-left right"></i>
                <!-- <span class="badge badge-info right">6</span>-->
               </p>

@@ -12,8 +12,6 @@ $cat_admin = $_SESSION["categoria"];
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 <?php require_once("links_plugin.php");
- require_once('../modales/nueva_optica.php');
- require_once('../modales/nueva_sucursal.php');
  ?>
 <style>
   
@@ -52,11 +50,10 @@ body{
   <div class="content-wrapper">
     <section class="content">
       <div class="container-fluid">
-        <h1 style="font-size: 15px; text-align: center;padding: 3px"><u><b>FACTURACIÓN DE CREDITOS FISCALES</b></u></h1>
-
+        <h1 style="font-size: 15px; text-align: center;padding: 3px"><u><b>EMISION DE FACTURAS</b></u></h1>
         <div class="row">
           <div class="col-sm-2">
-            <input type="search" class="form-control" id="codigo-orden-fact" onchange="getDataOrdenFact('ccf')">
+            <input type="search" class="form-control" id="codigo-orden-fact" onchange="getDataOrdenFact('factura')">
           </div>
           <div class="col-sm-1">
             

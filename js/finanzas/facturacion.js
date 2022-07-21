@@ -69,7 +69,8 @@ function alertsFacturacion(icono, titulo){
   });
 }
 
-function getDataOrdenFact(){
+function getDataOrdenFact(documento){
+  
 	let cod_orden_act = document.getElementById("codigo-orden-fact").value;
 	$.ajax({
     url:"../ajax/ordenes.php?op=get_data_oden",
@@ -93,17 +94,17 @@ function getDataOrdenFact(){
         $("#fecha_registro").val(data.fecha_registro);
         $("#metodo_cobro").val(data.metodo_cobro);
         $("#id_orden").val(data.id_orden);
-        confirmaRegistro();
+        confirmaRegistro(documento);
       }         
     }
 });
   
 }
 
-function confirmaRegistro(){
+function confirmaRegistro(documento){
       let paciente = $("#det_pac_orden").html();
       Swal.fire({
-      title: 'Confirmar registro de CCF',
+      title: 'Confirmar registro de '+documento,
       icon: 'success',
       html: 'Paciente: <b>'+ paciente +'</b>',
       showCancelButton: false,
@@ -111,8 +112,7 @@ function confirmaRegistro(){
       confirmButtonText:'<i class="fa fa-print"></i> Imprimir!',
       }).then((result) => {
       if (result.isConfirmed) {
-        registraCCF();
-       //printFacturacion("ccf");
+        registraComprobante(documento);
       }
     })
 }
@@ -123,7 +123,7 @@ function printFacturacion(doc){
   let id_optica = $("#id_optica_fact").val();
   let id_sucursal = $("#id_suc_fact").val();
 
-  doc == 'factura' ? act = 'imprimir_fact' : act = 'imprimir_ccf.php';
+  doc == 'factura' ? act = 'imprimir_fact.php' : act = 'imprimir_ccf.php';
 
   if (paciente !="" && id_optica !="") {
 
@@ -196,7 +196,7 @@ function clearDataFact(){
 }
 
 
-function registraCCF(){  
+function registraComprobante(documento){    
   let codigo = $("#codigo_orden_fact").val();
   let paciente = $("#det_pac_orden").html();
   let id_optica = $("#id_optica_fact").val();
@@ -209,15 +209,15 @@ function registraCCF(){
   let id_usuario = $("#id_usuario").val();
   /*======== SE REGISTRA CCF========*/
    $.ajax({
-      url:"../ajax/creditos.php?op=registrarCCF",
+      url:"../ajax/creditos.php?op=registrar_comprobante",
       method:"POST",
-      data : {codigo:codigo,paciente:paciente,id_optica:id_optica,id_sucursal:id_sucursal,monto_orden:monto_orden,dia_de_pago:dia_de_pago,fecha_registro:fecha_registro,metodo_cobro:metodo_cobro,id_orden:id_orden,id_usuario:id_usuario},
+      data : {codigo:codigo,paciente:paciente,id_optica:id_optica,id_sucursal:id_sucursal,monto_orden:monto_orden,dia_de_pago:dia_de_pago,fecha_registro:fecha_registro,metodo_cobro:metodo_cobro,id_orden:id_orden,id_usuario:id_usuario,documento:documento},
       cache:false,
       dataType:"json",
       success:function(data){
         console.log(data.msj)
-        if(data.msj=='ccfreg'){
-          printFacturacion('ccf');
+        if(data.msj=='okcomprobante'){
+          printFacturacion(documento);
         }else{
           Swal.fire('Ha ocurrido un error!','verificar que orden no ha sido facturada anteriormente!','error');
           clearDataFact();

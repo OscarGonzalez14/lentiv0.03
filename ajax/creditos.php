@@ -6,8 +6,8 @@ $creditos = new Creditos();
 
 switch ($_GET["op"]) {
 
-case 'registrarCCF':
-	$creditos->registrarCCF($_POST["codigo"],$_POST["paciente"],$_POST["id_optica"],$_POST["id_sucursal"],$_POST["monto_orden"],$_POST["dia_de_pago"],$_POST["fecha_registro"],$_POST["metodo_cobro"],$_POST["id_orden"],$_POST["id_usuario"]);
+case 'registrar_comprobante':
+	$creditos->registrarComprobante($_POST["codigo"],$_POST["paciente"],$_POST["id_optica"],$_POST["id_sucursal"],$_POST["monto_orden"],$_POST["dia_de_pago"],$_POST["fecha_registro"],$_POST["metodo_cobro"],$_POST["id_orden"],$_POST["id_usuario"],$_POST["documento"]);
 
     break;
 

@@ -92,12 +92,12 @@ $code = $Bar->getBarcode($codigo, $Bar::TYPE_CODE_128,'1','30');
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>.::Imprimir CCF::.</title>
+	<title>.::Imprimir Factura::.</title>
 	<style>
 		html{
       	margin-top: 8px;
         margin-left: 0px;
-        margin-right:20px; 
+        margin-right:8px; 
         margin-bottom: 0px;
     }
     body{
@@ -144,17 +144,17 @@ $code = $Bar->getBarcode($codigo, $Bar::TYPE_CODE_128,'1','30');
 	}
 	</style>
     </head>
-	<div style="height: 820px; margin-top: 44px">
+	<div style="height: 815px; margin-top: 70px">
 
-		<table width="100%" style="margin-left: 15px">
+		<table width="100%" style="margin-left: 3px">
 
 		<tr>
-			<td class="original-cliente" colspan="50" style="width: 50%;">
-				<?php require("../helpers/plantilla_ccf.php")?>
+			<td class="original-cliente" colspan="44" style="width: 44%;margin-left: 60px !important">
+				<?php require("../helpers/plantilla_factura.php")?>
 			</td><!--original-cliente-->
-
-			<td class="duplicado-emisor" colspan="50" style="width: 50%;margin-left: 35px !important;margin-right: 10px">
-				<?php require("../helpers/plantilla_ccf.php")?>
+			<td colspan="12" style="width: 12%;color:white">HHH</td>
+			<td class="duplicado-emisor" colspan="44" style="width: 44%;margin-left: 60px !important;margin-right: 2px">
+				<?php require("../helpers/plantilla_factura.php")?>
 			</td><!--duplicado-emisor-->
 		</tr>
 
@@ -164,14 +164,14 @@ $code = $Bar->getBarcode($codigo, $Bar::TYPE_CODE_128,'1','30');
 
 	<div>
 	
-	<table width="100%" style="margin-left: 15px">
+	<table width="100%" style="margin-left: 3px">
 		<tr>
-			<td class="original-cliente" colspan="50" style="width: 50%;">
-				<?php require("../helpers/plantilla_ccf.php")?>
+			<td class="original-cliente"colspan="44" style="width: 44%;margin-left: 60px !important">
+				<?php require("../helpers/plantilla_factura.php")?>
 			</td><!--original-cliente-->
-
-			<td class="duplicado-emisor" colspan="50" style="width: 50%;margin-left: 30px !important;margin-right: 10px">
-				<?php require("../helpers/plantilla_ccf.php")?>
+			<td colspan="12" style="width: 12%;color:white">HHH</td>
+			<td class="duplicado-emisor" colspan="44" style="width: 44%;margin-left: 60px !important;margin-right: 2px">
+				<?php require("../helpers/plantilla_factura.php")?>
 			</td><!--duplicado-emisor-->
 		</tr>
 	    </table>

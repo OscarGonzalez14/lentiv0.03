@@ -211,7 +211,7 @@ function guardar_orden(){
       if (data != 'Error') {
       clearElementsForm();   
       $("#datatable_ordenes").DataTable().ajax.reload(); 
-      event.preventDefault()
+      //event.preventDefault()
       Swal.fire({
         title: 'Codigo: '+data.codigo,
         icon: 'info',

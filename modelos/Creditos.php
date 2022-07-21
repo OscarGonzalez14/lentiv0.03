@@ -3,12 +3,12 @@ require_once("../config/conexion.php");
 
 class Creditos extends conectar {//inicio de la clase
 
-	public function getCorrelativoCCF(){
+	public function getCorrelativoComprobantes($documento){
 		$conectar=parent::conexion();
     	parent::set_names();
-
+        $tabla = $documento =='factura' ? "facturas" : "creditos_fiscales";
     	$conectar= parent::conexion();
-      	$sql= "select n_correlativo from creditos_fiscales order by id_ccf DESC limit 1;";
+      	$sql= "select n_correlativo from $tabla order by id_ccf DESC limit 1;";
       	$sql=$conectar->prepare($sql);
       	$sql->execute();
       	//return $sql->fetchColumn();
@@ -19,7 +19,7 @@ class Creditos extends conectar {//inicio de la clase
 
     ################## REGISTRAR CCF ################
 
-	public function registrarCCF($codigo,$paciente,$id_optica,$id_sucursal,$monto_orden,$dia_de_pago,$fecha_registro,$metodo_cobro,$id_orden,$id_usuario){
+	public function registrarComprobante($codigo,$paciente,$id_optica,$id_sucursal,$monto_orden,$dia_de_pago,$fecha_registro,$metodo_cobro,$id_orden,$id_usuario,$documento){
 	    $conectar=parent::conexion();
     	parent::set_names();
 
@@ -40,7 +40,7 @@ class Creditos extends conectar {//inicio de la clase
         $abono = 0;
 		$sql = "insert into creditos values(null,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		$sql = $conectar->prepare($sql);
-		$sql->bindValue(1, $tipo_credito);
+		$sql->bindValue(1, $documento);
 		$sql->bindValue(2, $monto_orden);
 		$sql->bindValue(3, $hoy);
 		$sql->bindValue(4, $hora);
@@ -55,34 +55,34 @@ class Creditos extends conectar {//inicio de la clase
 		$sql->bindValue(13, $id_orden);
 		$sql->execute();
 
-		$correlativo_ccf = $this->getCorrelativoCCF();
+		$correlativo_ccf = $this->getCorrelativoComprobantes($documento);
 		if(is_array($correlativo_ccf)==true and count($correlativo_ccf)>0){
 			foreach($correlativo_ccf as $v){
 				$n_credito = $v["n_correlativo"];
 			}
 			$corr = substr($n_credito,4,20);
-			$correlativo = "ccf-".((int)$corr + (int)1);
+			$correlativo = ((int)$corr + (int)1);
 
 		}else{
-			$correlativo = "ccf-1";
+			$correlativo = "1";
 		}
 		 
-        
+        $tabla = $documento =='factura' ? "facturas" : "creditos_fiscales";
         $estado_ccf ="Sin cancelar";
-		$sql2 = "insert into creditos_fiscales values(null,?,?,?,?,?,?,?,?);";
+		$sql2 = "insert into $tabla values(null,?,?,?,?,?,?,?,?);";
 		$sql2 = $conectar->prepare($sql2);
 		$sql2->bindValue(1, $correlativo);
 		$sql2->bindValue(2, $codigo);
 		$sql2->bindValue(3, $monto_orden);
 		$sql2->bindValue(4, $hoy);
 		$sql2->bindValue(5, $hora);
-		$sql2->bindValue(6, $id_sucursal);
+		$sql2->bindValue(6, $id_optica);
 		$sql2->bindValue(7, $id_usuario);
 		$sql2->bindValue(8, $estado_ccf);
 		$sql2->execute();
 
 		//Registrar Accion
-        $accion = "Registro de CCF";
+        $accion = $documento = 'factura' ? "Registro factura" : "Registra CCF";
 		$obs = "CCF No.: ".strtoupper($correlativo);
 		$sql3 = "insert into acciones_orden values(null,?,?,?,?,?);";
     	$sql3 = $conectar->prepare($sql3);
@@ -94,7 +94,7 @@ class Creditos extends conectar {//inicio de la clase
     	$sql3->execute();
 
 		if ($sql->rowCount() > 0 &&  $sql2->rowCount() > 0){			
-			$data = ['msj'=>'ccfreg','correlativo'=>$correlativo,'fecha_pago'=> date("d-m-Y",strtotime($diaPago))];			
+			$data = ['msj'=>'okcomprobante','correlativo'=>$correlativo,'fecha_pago'=> date("d-m-Y",strtotime($diaPago))];			
 		}else{
 			$data = ['msj'=>'ccferror'];
 		}
