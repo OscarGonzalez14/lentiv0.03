@@ -6,13 +6,20 @@ class Creditos extends conectar {//inicio de la clase
 	public function getCorrelativoComprobantes($documento){
 		$conectar=parent::conexion();
     	parent::set_names();
-        $tabla = $documento =='factura' ? "facturas" : "creditos_fiscales";
+        //$tabla = $documento =='factura' ? "facturas" : "creditos_fiscales";
+		if($documento =='factura'){
+			$tabla = "facturas";
+			$order = "id_factura";
+		}else{
+			$tabla = "creditos_fiscales";
+			$order = "id_ccf";
+		}
     	$conectar= parent::conexion();
-      	$sql= "select n_correlativo from $tabla order by id_ccf DESC limit 1;";
+      	$sql= "select n_correlativo from $tabla order by $order DESC limit 1;";
       	$sql=$conectar->prepare($sql);
       	$sql->execute();
       	//return $sql->fetchColumn();
-		return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+		return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	
@@ -60,14 +67,22 @@ class Creditos extends conectar {//inicio de la clase
 			foreach($correlativo_ccf as $v){
 				$n_credito = $v["n_correlativo"];
 			}
-			$corr = substr($n_credito,4,20);
-			$correlativo = ((int)$corr + (int)1);
+			$correlativo = (int)$n_credito + (int)1;
 
 		}else{
 			$correlativo = "1";
 		}
 		 
+		//Comprobar correlativo 
         $tabla = $documento =='factura' ? "facturas" : "creditos_fiscales";
+		
+        $sql4 = "select *from $tabla where codigo_orden = ?;";
+		$sql4 = $conectar->prepare($sql4);
+		$sql4->bindValue(1, $codigo);
+        $sql4->execute();
+		$resultado_corr = $sql4->fetchAll(PDO::FETCH_ASSOC);
+        
+		if(is_array($resultado_corr)==true and count($resultado_corr)==0){
         $estado_ccf ="Sin cancelar";
 		$sql2 = "insert into $tabla values(null,?,?,?,?,?,?,?,?);";
 		$sql2 = $conectar->prepare($sql2);
@@ -80,6 +95,8 @@ class Creditos extends conectar {//inicio de la clase
 		$sql2->bindValue(7, $id_usuario);
 		$sql2->bindValue(8, $estado_ccf);
 		$sql2->execute();
+		
+		}
 
 		//Registrar Accion
         $accion = $documento = 'factura' ? "Registro factura" : "Registra CCF";
@@ -96,7 +113,7 @@ class Creditos extends conectar {//inicio de la clase
 		if ($sql->rowCount() > 0 &&  $sql2->rowCount() > 0){			
 			$data = ['msj'=>'okcomprobante','correlativo'=>$correlativo,'fecha_pago'=> date("d-m-Y",strtotime($diaPago))];			
 		}else{
-			$data = ['msj'=>'ccferror'];
+			$data = ['msj'=>"errorInsert"];
 		}
 		echo json_encode($data);	
 	}
@@ -106,7 +123,7 @@ class Creditos extends conectar {//inicio de la clase
 		$conectar=parent::conexion();
     	parent::set_names();
 
-		$sql = "SELECT cf.id_ccf,cf.n_correlativo,cf.codigo_orden,cf.fecha,cf.fecha,cf.hora,cf.monto,o.paciente,s.direccion,op.nombre from creditos_fiscales as cf inner join orden as o on cf.codigo_orden=o.codigo inner join sucursal_optica as s on s.id_sucursal=cf.id_sucursal INNER join optica as op on op.id_optica=s.id_optica;";
+		$sql = "select cf.id_ccf,cf.n_correlativo,cf.codigo_orden,cf.fecha,cf.fecha,cf.hora,cf.monto,o.paciente,op.nombre from creditos_fiscales as cf inner join orden as o on cf.codigo_orden=o.codigo inner join optica as op on op.id_optica=cf.id_optica limit 1000;";
 		$sql=$conectar->prepare($sql);
         $sql->execute();
         return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);

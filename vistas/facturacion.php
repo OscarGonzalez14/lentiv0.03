@@ -116,7 +116,6 @@ body{
                  <th>#Orden</th>
                  <th>Paciente</th>
                  <th>Optica</th>
-                 <th>Sucursal</th>
                  <th>Monto</th>
                  <th>Fecha fect.</th>
                  <th>Acciones</th>
