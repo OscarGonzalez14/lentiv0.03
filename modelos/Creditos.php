@@ -141,7 +141,6 @@ class Creditos extends conectar {//inicio de la clase
 
 	public function getCreditosGneral($optica){
         $id_optica = implode("", $optica);
-
         $conectar=parent::conexion();
     	parent::set_names();
 

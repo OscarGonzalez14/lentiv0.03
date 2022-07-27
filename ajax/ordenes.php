@@ -21,10 +21,14 @@ break;
 case 'sucursales_optica':
 
 	$sucursales = $ordenes->get_sucursales_optica($_POST["optica"]);
-	$options = "<option value='0'>Seleccionar sucursal...</option>";
+	$options = "";
+	if(is_array($sucursales)==true and count($sucursales)>1){
+		$options .= "<option value='0'>Seleccionar sucursal...</option>";
+	}
+	
 
 	for($i=0; $i < sizeof($sucursales); $i++){
-		$options.="<option value='".$sucursales[$i]["direccion"]."'>".$sucursales[$i]["direccion"]."-".$sucursales[$i]["telefono"]."</option>";
+		$options.="<option value='".$sucursales[$i]["id_sucursal"]."'>".$sucursales[$i]["direccion"]."-".$sucursales[$i]["telefono"]."</option>";
 	}
 
 	echo $options;
@@ -92,7 +96,7 @@ case 'get_ordenes':
 
   $sub_array[] = $row["id_orden"];
 	$sub_array[] = $row["codigo"];
-	$sub_array[] = $row["nombre"]." - ".$row["id_sucursal"];
+	$sub_array[] = $row["nombre"]." - ".$row["direccion"];
 	$sub_array[] = strtoupper($row["paciente"]);
 	$sub_array[] = '<span class="right badge badge-'.$color.'" style="font-size:12px"><i class=" fas '.$icon.'" style="color:'.$badge.'"></i> '.$status.'</span>';
 	$sub_array[] = '<button type="button"  class="btn btn-sm bg-light" onClick="detOrdenes(\''.$row['codigo'].'\')"><i class="fa fa-eye" aria-hidden="true" style="color:blue"></i></button>';

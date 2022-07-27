@@ -145,6 +145,7 @@ function guardar_orden(){
   let observaciones = $("#observaciones_orden").val();
   let usuario = $("#id_usuario").val();
   let id_sucursal = $("#optica_sucursal").val();
+  if(id_sucursal=='0'){Toast.fire({icon: 'error',title: 'Sucusal vacia'}); return false;}
   let id_optica = $("#optica_orden").val();
   let tipo_orden = "Laboratorio";
   let lentevs = $("#lentevs").val();

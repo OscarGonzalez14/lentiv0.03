@@ -166,7 +166,7 @@ public function get_ordenes_pendientes(){
     $conectar = parent::conexion();
     parent::set_names();
 
-    $sql="select ord.id_orden,ord.codigo,ord.paciente,ord.estado,ord.id_sucursal,ord.id_optica,o.nombre,ord.fecha_creacion,ord.usuario from orden as ord inner join optica as o on ord.id_optica=o.id_optica  order by ord.id_orden DESC;";
+    $sql="select ord.id_orden,ord.codigo,ord.paciente,ord.estado,ord.id_sucursal,ord.id_optica,o.nombre,s.direccion,ord.fecha_creacion,ord.usuario from orden as ord inner join optica as o on ord.id_optica=o.id_optica inner join sucursal_optica as s on o.id_optica=s.id_optica where ord.id_sucursal=s.id_sucursal  order by ord.id_orden DESC;";
     $sql = $conectar->prepare($sql);
     $sql->execute();
     return $resultado=$sql->fetchAll();

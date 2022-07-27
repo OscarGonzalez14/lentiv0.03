@@ -23,6 +23,7 @@ case 'listar_ccf_diarios':
         $sub_array[] = $row["codigo_orden"];
         $sub_array[] = $row["paciente"];  
         $sub_array[] = $row["nombre"];
+        $sub_array[] = $row["direccion"];
         $sub_array[] = "$".number_format($row["monto"],2,".",",");  
         $sub_array[] =  date("d-m-Y", strtotime($row["fecha"]))." ".$row["hora"];   
         $sub_array[] = '<button type="button"  class="btn btn-sm bg-light" onClick="ver_detalle_despachos()"><i class="fa fa-eye" aria-hidden="true" style="color:blue"></i></button>';
