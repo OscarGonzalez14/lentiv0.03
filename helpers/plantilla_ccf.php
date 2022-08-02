@@ -120,19 +120,19 @@
 	<tr>
 		<td colspan="65" style="width: 65%"></td>
 		<td colspan="20" style="width: 20%;text-align: right;" class="border-montos"><b>Gravados: $</b></td>
-		<td colspan="10" style="width: 15%;text-align: right;" class="border-montos">$<?php echo number_format($monto,2,".",",");?></td>
+		<td colspan="10" style="width: 15%;text-align: right;margin-right:5px;padding:0px" class="border-montos"><?php $gravado = $monto/1.13; echo number_format($gravado,2,".",",");?></td>
 	</tr>
 	<tr>
 		<td colspan="65" style="width: 65%; background: black; text-align: center;color: white">OPERACIONES MAYORES A $400</td>
 		<td colspan="20" style="width: 20%;text-align: right;" class="border-montos"><b>IVA: $</b></td>
-		<td colspan="10" style="width: 15%;text-align: right;" class="border-montos">$<?php echo number_format($iva,2,".",",");?></td>
+		<td colspan="10" style="width: 15%;text-align: right;margin-right:5px;padding:0px" class="border-montos"><?php $iva = $gravado*0.13; echo number_format($iva,2,".",",");?></td>
 	</tr>
 
 	<tr style="">
 			<td colspan="65" width="65%"></td>
 
 		<td colspan="20" style="width: 20%;text-align: right;" class="border-montos"><b>Sub Total: $</b></td>
-		<td colspan="10" style="width: 15%;text-align: right;" class="border-montos">$<?php echo number_format($subtotal,2,".",",");?></td>
+		<td colspan="10" style="width: 15%;text-align: right;margin-right:5px;padding:0px" class="border-montos"><?php echo number_format($monto,2,".",",");?></td>
 	</tr>
 
 	<tr style="">
@@ -142,7 +142,7 @@
 		<td colspan="23" style="width: 23%;"></td>
 
 		<td colspan="20" style="width: 20%;text-align: right;" class="border-montos"><b>Retenido: $</b></td>
-		<td colspan="10" style="width: 15%;text-align: right;" class="border-montos">$<?php echo 123.12;?></td>
+		<td colspan="10" style="width: 15%;text-align: right;" class="border-montos">$<?php echo"";?></td>
 	</tr>
 
 	<tr>
@@ -166,7 +166,7 @@
 	<tr>
 		<td colspan="65" style="width: 65%"></td>
 		<td colspan="20" style="width: 20%;text-align: right;color: blue" class="border-montos"><b>Total: $</b></td>
-		<td colspan="10" style="width: 15%;text-align: right;color: blue" class="border-montos">$<b><?php echo number_format($totales,2,".",",");?></b></td>
+		<td colspan="10" style="width: 15%;text-align: right;color: blue;margin-right:5px;padding:0px" class="border-montos"><b><?php echo number_format($monto,2,".",",");?></b></td>
 	</tr>
 </table>
 

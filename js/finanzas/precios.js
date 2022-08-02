@@ -285,12 +285,29 @@ function operacionesTermAr(){
   if(tratamiento=="Blue Uv"){
     document.getElementById("blueuvspan").innerHTML="";
     document.getElementById("blueuvspan").innerHTML="";
-    document.getElementById("p_venta_trat").value = 16.95;
+    document.getElementById("p_venta_trat").value = 20.00;
     setPrecioVenta();
   }else if(tratamiento=="Uv"){
     document.getElementById("blueuvspan").innerHTML="";
     document.getElementById("blueuvspan").innerHTML="";
-    document.getElementById("p_venta_trat").value = 14.00;
+    let precio_od = 0;
+    let precio_oi = 0;
+    let odcilindrosf_orden = $("#odcilindrosf_orden").val();
+    let oicilindrosf_orden = $("#oicolindrosf_orden").val();
+    if(odcilindrosf_orden > -2){
+      precio_od = 7
+    }else{
+      precio_od = 9
+    }
+
+    if(oicilindrosf_orden > -2){
+      precio_oi = 7
+    }else{
+      precio_oi = 9
+    }
+
+    let p_uv = parseInt(precio_od) + parseInt(precio_oi);
+    document.getElementById("p_venta_trat").value = p_uv;
     setPrecioVenta();
   }
 }

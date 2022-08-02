@@ -238,7 +238,7 @@
                 <div class="eight" style="align-items: center">
                   <h1>ANTIRREFLEJANTE</h1>
                   <div class="d-flex justify-content-center">
-                    <div class="custom-control custom-switch custom-switch-off-success custom-switch-on-dark">
+                    <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-dark">
                       <input type="checkbox" class="custom-control-input  checks check_clear" id="arblack" value="AR BLACK DIAMOND" name='chk_antiR' onclick='calculaPrecioAr()'; style="background-color: gray !important; color: gray !important">
                       <label class="custom-control-label" for="arblack">AR BLACK DIAMOND</label>
                     </div>

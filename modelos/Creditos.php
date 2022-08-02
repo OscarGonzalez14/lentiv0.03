@@ -99,7 +99,7 @@ class Creditos extends conectar {//inicio de la clase
 		}
 
 		//Registrar Accion
-        $accion = $documento = 'factura' ? "Registro factura" : "Registra CCF";
+        $accion = $documento == 'factura' ? "Registro factura" : "Registra CCF";
 		$obs = "CCF No.: ".strtoupper($correlativo);
 		$sql3 = "insert into acciones_orden values(null,?,?,?,?,?);";
     	$sql3 = $conectar->prepare($sql3);
@@ -113,7 +113,7 @@ class Creditos extends conectar {//inicio de la clase
 		if ($sql->rowCount() > 0 &&  $sql2->rowCount() > 0){			
 			$data = ['msj'=>'okcomprobante','correlativo'=>$correlativo,'fecha_pago'=> date("d-m-Y",strtotime($diaPago))];			
 		}else{
-			$data = ['msj'=>"errorInsert"];
+			$data = ['msj'=>$_POST];
 		}
 		echo json_encode($data);	
 	}

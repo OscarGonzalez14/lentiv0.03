@@ -166,7 +166,7 @@ $code = $Bar->getBarcode($codigo, $Bar::TYPE_CODE_128,'1','30');
 	
 	<table width="100%" style="margin-left: 3px">
 		<tr>
-			<td class="original-cliente"colspan="44" style="width: 44%;margin-left: 60px !important">
+			<td class="original-cliente" colspan="44" style="width: 44%;margin-left: 60px !important">
 				<?php require("../helpers/plantilla_factura.php")?>
 			</td><!--original-cliente-->
 			<td colspan="12" style="width: 12%;color:white">HHH</td>

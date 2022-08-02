@@ -149,11 +149,11 @@ $code = $Bar->getBarcode($codigo, $Bar::TYPE_CODE_128,'1','30');
 		<table width="100%" style="margin-left: 15px">
 
 		<tr>
-			<td class="original-cliente" colspan="44" style="width: 44%;margin-left: 60px !important">
+			<td class="original-cliente" colspan="44" style="width: 44%;margin-left: 0px !important;margin-right:15px">
 				<?php require("../helpers/plantilla_ccf.php")?>
 			</td><!--original-cliente-->
 			<td colspan="12" style="width: 12%;color:white">HHH</td>
-			<td class="duplicado-emisor" colspan="44" style="width: 44%;margin-left: 60px !important;margin-right: 2px">
+			<td class="duplicado-emisor" colspan="44" style="width: 44%;margin-left: l5px !important;margin-right: 2px">
 				<?php require("../helpers/plantilla_ccf.php")?>
 			</td><!--duplicado-emisor-->
 		</tr>
@@ -166,7 +166,7 @@ $code = $Bar->getBarcode($codigo, $Bar::TYPE_CODE_128,'1','30');
 	
 	<table width="100%" style="margin-left: 15px">
 		<tr>
-			<td class="original-cliente" colspan="44" style="width: 44%;margin-left: 5px !important">
+			<td class="original-cliente" colspan="44" style="width: 44%;margin-left: 15px !important">
 				<?php require("../helpers/plantilla_ccf.php")?>
 			</td><!--original-cliente-->
 			<td colspan="12" style="width: 12%;color:white">HHH</td>
