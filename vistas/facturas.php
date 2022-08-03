@@ -106,16 +106,16 @@ body{
             </style>
             <button type="button" class="btn btn-tool bg-light btn-xs"><i class="fas fa-search"></i> Por fecha</button>
             <button type="button" class="btn btn-tool bg-light btn-xs"><i class="fas fa-search"></i> Por Rango</button><br>
-           <table width="100%" class="table-hover table-bordered" id="datatable_ccf" data-order='[[ 0, "desc" ]]' style="margin-top: 3px">        
+           <table width="100%" class="table-hover table-bordered" id="datatable_factura" data-order='[[ 0, "desc" ]]' style="margin-top: 3px">        
                <thead class="style_th bg-dark" style="color: white">
                  <th>Id</th>
                  <th>Correlativo</th>
                  <th>#Orden</th>
                  <th>Paciente</th>
                  <th>Optica</th>
-                 <th>Sucursal</th>
                  <th>Monto</th>
-                 <th>Fecha fect.</th>
+                 <th>Fecha fact.</th>
+                 <th>Estado</th>
                  <th>Acciones</th>
                </thead>
                <tbody class="style_th"></tbody>

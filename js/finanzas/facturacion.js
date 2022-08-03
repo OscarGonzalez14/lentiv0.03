@@ -3,12 +3,16 @@ function init_fact(){
   $('#codigo-orden-fact').val("");
   $('#codigo-orden-fact').focus();
   get_ccf_hoy();
+  facturasListadoGeneral();
   
 }
 
 ///////////////////////// TEMPLATE DATATABLE /////////////
 function get_ccf_hoy(){
   dtTemplate("datatable_ccf","listar_ccf_diarios")
+}
+function facturasListadoGeneral(){
+  dtTemplate("datatable_factura","listado_general_facturas")
 }
 function dtTemplate(table,route){
 	tabla = $('#'+table).DataTable({      

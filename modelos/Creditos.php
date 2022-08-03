@@ -129,6 +129,17 @@ class Creditos extends conectar {//inicio de la clase
         return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	public function getFacturasDiarios(){
+		$conectar=parent::conexion();
+    	parent::set_names();
+		$sql = "select f.id_factura,f.n_correlativo,f.codigo_orden,f.fecha,f.hora,f.estado,o.nombre,od.paciente,f.monto from facturas as f INNER join optica as o on f.id_optica=o.id_optica INNER join orden as od on od.codigo=f.codigo_orden order by f.id_factura DESC limit 1000;";
+		$sql=$conectar->prepare($sql);
+        $sql->execute();
+        return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	/*********LISTAR FACTURAS DIARIAS   *********/
+
 	public function getCreditosMensuales(){
 		$conectar=parent::conexion();
     	parent::set_names();
